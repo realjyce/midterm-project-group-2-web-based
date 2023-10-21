@@ -8,7 +8,7 @@ consisting of:
   + [GANBOLD OTGONBAATAR](Otgonbaatar)
   + [JASON CLARENCE](https://github.com/realjyce)
 
-Contents below are the same as the **[Basic-design-projects-update.pdf](https://github.com/realjyce/midterm-project-group-2-web-based/blob/main/Basic%20design%20projects-Update.pdf)** and **[README](./README.md)**
+Contents below are the same as: **[Basic-design-projects-update.pdf](https://github.com/realjyce/midterm-project-group-2-web-based/blob/main/Basic%20design%20projects-Update.pdf)** and **[README](./README.md)**
 
 ## Project 2: Web-based Machine Learning App Guideline
 
@@ -24,8 +24,11 @@ user-friendly, includes the following tasks:
   | | o   80:20 (80% training data, 20% testing data) |
   | | o   70:30 (70% training data, 30% testing data) |
   | | o   60:40 (60% training data, 40% testing data) |
-| 4. | Choosing a machine learning model for prediction on training and testing data: Machine learning models in regression mode (Random Forest or XGBoost) |
-| 5. | Running the model on training and testing data and evaluating the results with the following metrics: ***RMSE, MAE, and R2*** |
+| 4. | Choosing a machine learning model for prediction on training and testing data: Machine learning models in regression mode (`Random Forest` or `XGBoost`) |
+| 5. | Running the model on training and testing data and evaluating the results with the following metrics:|
+| | `RMSE` |
+| | `MAE` |
+| | `R2` |
 | 6. | Displaying a histogram of errors between actual (Flood) and predicted data in step 5 |
 | 7. | Displaying the determination of the importance of criteria using the machine learning model |
 | 8. |  Calling new data and predicting on this data: New data in CSV format is called initially. 
