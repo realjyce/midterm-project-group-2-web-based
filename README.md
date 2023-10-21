@@ -39,3 +39,61 @@ user-friendly, includes the following tasks:
 |o Steps 6 and 7 are considered extra credit. |
 |o Choose a greater number of algorithms in step four.|
 |o Display the area boundary in step 8 using https://mapshaper.org/ or Leaflet.|
+
+## An Example of Different Steps for Executing a Machine Learning Algorithm in Python:
+1. Import the Required Libraries:
+```import numpy as np
+from matplotlib.pyplot import figure
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from permetrics.regression import RegressionMetric
+from sklearn.ensemble import RandomForestRegressor
+import sklearn.metrics as metrics
+```
+2. Load the Data:
+```
+ReadData = pd.read_csv('/content/drive/MyDrive/…../Data.csv')
+```
+4. Split the Data into Training and Test Sets:
+```
+X = ReadData.drop([Flood], axis = 1) 
+y = ReadData [Flood]
+4. Set the Data Ratio:
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, shuffle=True, 
+random_state=1)
+```
+5. Create and Train the Model:
+```
+model = RandomForestRegressor(random_state = 1).fit(X_train, y_train)
+```
+7. Predict Using the Model on Training and Test Data:
+```yhat_train = model.predict(X_train)
+yhat_test = model.predict(X_test)
+```
+7. Evaluate the Results for Training and Test Data:
+```
+r2 = metrics.r2_score(y_train, yhat_train)
+mae = metrics.mean_absolute_error(y_train, yhat_train)
+mse = metrics.mean_squared_error(y_train, yhat_train)
+rmse = np.sqrt(mse)
+r2 = metrics.r2_score(y_test, yhat_test)
+mae = metrics.mean_absolute_error(y_test, yhat_test)
+mse = metrics.mean_squared_error(y_test, yhat_test)
+rmse = np.sqrt(mse)
+```
+8. Load New Data:
+```
+NewData = pd.read_csv('/content/drive/MyDrive/…../NewData.csv')
+```
+10. Predict Using the Model on New Data:
+```
+output_prediction = model.predict(Newdata)
+```
+12. Calculate the Error Histogram:
+```error = y_test - y_test_pred
+plt.hist(error, bins=30)
+plt.xlabel("Prediction Error")
+plt.ylabel("Count")
+plt.title("Error Histogram")
+plt.show()
+```
