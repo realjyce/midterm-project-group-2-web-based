@@ -11,38 +11,27 @@ if menu=="Home":
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# MENU-ING AND TITLE
-menu = st.sidebar.radio("Menu", ["Home", "Raw Data"])
-if menu == "Home":
-    title = st.title("Project 2B: Web-App Machine Learning with Python")
-    st.balloons()
-    st.write("'Hello World'")
-
-# DATA CACHE, Dataframe as "df"
-# DATA CACHE FUNCTION
+# DATA CACHING
 @st.cache_data
 def load_data(url):
     df = pd.read_csv(url)
-    df = load_data('./project/Data.csv')
     return df
 
+df = load_data('./project/Data.csv')
 # MENU:HOME
 
 # MENU: RAW DATA
-if menu=="Raw Data":
+if menu == "Raw Data":
     title = st.title('Raw Data for [Flood]')
     st.dataframe(df)
-    st.button('Rerun')
 
 # MENU: HEAD DATA
-if menu=="Head":
+if menu == "Head":
     st.header("Head Overview Data")
     head = df.head()
     st.write(head)
 # MENU: RAW DATA
-if menu != "Raw Data":
-    st.write('Shape of Dataset')
-else:
+if menu == "Raw Data":
     title = st.title('Raw Data for [Flood]')
     df = load_data('./project/Data.csv')
     df_1 = df.iloc[:, :-1]
