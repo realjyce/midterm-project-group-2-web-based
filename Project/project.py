@@ -70,6 +70,7 @@ if menu == "Raw Data":
     
     st.button('Rerun')
 
+# Hide Watermark
 hide_made_with_streamlit = """
     <style>
         #MainMenu{visibility: hidden;}
