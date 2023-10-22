@@ -23,8 +23,8 @@ if menu == "Home":
 @st.cache_data
 def load_data(url):
     df = pd.read_csv(url)
+    df = load_data('./project/Data.csv')
     return df
-df = load_data('./project/Data.csv')
 
 # MENU:HOME
 
