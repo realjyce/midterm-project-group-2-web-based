@@ -17,6 +17,7 @@ if menu=="Home":
     st.write("'Hello World'")
 
 # DATA CACHE, Dataframe as "df"
+# DATA CACHE FUNCTION
 @st.cache_data
 def load_data(url):
     df = pd.read_csv(url)
