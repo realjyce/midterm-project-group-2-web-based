@@ -67,30 +67,6 @@ if menu == "Raw Data":
     
     st.button('Rerun')
     
-#MODEL
-if menu == "Model":
-    ratio_option = st.selectbox("Select Training and Testing Data Ratio", ["90:10", "80:20", "70:30", "60:40"])
-
-    # Map the selected ratio to a train-test split ratio
-    if ratio_option == "90:10":
-        train_ratio = 0.9
-    elif ratio_option == "80:20":
-        train_ratio = 0.8
-    elif ratio_option == "70:30":
-        train_ratio = 0.7
-    elif ratio_option == "60:40":
-        train_ratio = 0.6
-        
-    X_train, X_test, _, _ = train_test_split(X, X, test_size=1 - train_ratio, random_state=42) # Training, testing
-    model = RandomForestRegressor(random_state = 1).fit(X_train, y_train) # Train model
-    # Creating Scatter Plot for Model
-    y_predict = model.predict(X_test)
-    sns.scatterplot(x=X_test, y=y_predict)
-    plt.xlabel('Raw Y')
-    plt.ylabel('Predicted Y')
-    plt.show()
-
-
 # Hide Watermark
 hide_made_with_streamlit = """
     <style>
