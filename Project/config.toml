@@ -1,7 +1,0 @@
-[server]
-port = 8051
-maxCacheSize = 2048
-enableCORS = false
-
-[theme]
-primaryColor="FFFFFF"
