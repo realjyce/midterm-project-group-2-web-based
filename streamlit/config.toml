@@ -1,2 +1,4 @@
 [theme]
-primaryColor = "#FFFFFF"
+base="light"
+primaryColor="#626277"
+backgroundColor="#1b1a30"
