@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import ssl
 import seaborn as sns
+import matplotlib.pyplot as plt
 from permetrics.regression import RegressionMetric
 from sklearn.ensemble import RandomForestRegressor
 
@@ -19,8 +20,9 @@ def load_data(url):
 df = load_data('./project/Data.csv')
 
 df_1 = df.iloc[:, :-1]
+df_2 = df.iloc[:-1, :]
 X = df_1
-y = df_1
+y = df_2
 
 # MENU-ING AND TITLE
 menu = st.sidebar.radio("Menu",["Home", "Raw Data", "Model"])
@@ -47,7 +49,6 @@ if menu == "Raw Data":
         train_ratio = 0.6
 
     # Split the data into training and testing sets based on the selected ratio
-    X = df_1  # Usea df_1 as the data
     X_train, X_test, _, _ = train_test_split(X, X, test_size=1 - train_ratio, random_state=42)
 
     st.write("Data Shape:")
@@ -82,13 +83,14 @@ if menu == "Model":
         train_ratio = 0.6
         
     X_train, X_test, _, _ = train_test_split(X, X, test_size=1 - train_ratio, random_state=42) # Training, testing
+    y_train, y_test, _, _ = train_test_split(y, y, test_size=1 - train_ratio, random_state=42)
     model = RandomForestRegressor(random_state = 1).fit(X_train, y_train) # Train model
     # Creating Scatter Plot for Model
     y_predict = model.predict(X_test)
     sns.scatterplot(x=X_test, y=y_predict)
     plt.xlabel('Raw Y')
     plt.ylabel('Predicted Y')
-    plt.show()
+    st.pyplot()
 
 
 # Hide Watermark
