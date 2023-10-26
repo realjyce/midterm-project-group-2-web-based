@@ -1,4 +1,12 @@
+[server]
+port = 8501
+
 [theme]
-base="light"
-primaryColor="#626277"
-backgroundColor="#1b1a30"
+base='dark'
+primaryColor="#1b1a80"
+backgroundColor='#1b1a30'
+secondaryBackgroundColor='#FB5D5D'
+textColor = "#FFFFFF"
+
+[mapbox]
+token=''
