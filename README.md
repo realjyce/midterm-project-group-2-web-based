@@ -3,10 +3,10 @@
 ***Group 2B: Web-based Machine Learning with Python***, 
 
 consisting of:
-  + [KANOKPATRA KANATAN](https://github.com/POSTTTT) (LEADER)
+  + [KANOKPATRA KANATAN](https://github.com/POSTTTT)
   + [MAHMUDJONOV ZOHIDJON MURODJON UGLI](https://github.com/zohidjon-m)
   + [GANBOLD OTGONBAATAR](Otgonbaatar)
-  + [JASON CLARENCE](https://github.com/realjyce)
+  + [JASON CLARENCE](https://github.com/realjyce) (LEADER)
 
 Contents below are the same as: **[Basic-design-projects-update.pdf](https://github.com/realjyce/midterm-project-group-2-web-based/blob/main/Basic%20design%20projects-Update.pdf)** and **[README](./README.md)**
 
