@@ -1,31 +1,39 @@
 #MainMenu{visibility: hidden;}
 footer {visibility:hidden;}
 
+/*Data Ratio Radio*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div{
-    /*Data Ratio Radio*/
+    color: #0b6122;
     margin-block-start: 1em;
     margin-block-end: -1.5em;
     width: 10%;
 }
+/*Still Radio*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div{
-    cursor: pointer; /*Still Radio*/
+    cursor: pointer; 
     user-select:none;
-    border: 1px solid #002b36;
+    border: 1px solid #0b6122;
     background: white;
-    color: #002b36;
+    color: #0b6122;
+    transition: all 0.2s ease-in;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div:hover{
+    color: white;
+    background: #0b6122;
+    border: #0b6122;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) > div > div > p{
-    background: #002b36; /*Training Data Shape*/
+    background: #AFE1AF; /*Training Data Shape*/
     color: #ffffff;
-    border: solid 3px #002b36;
+    border: solid 3px #AFE1AF;
     width: 19.2em;
     border-radius: 10px;
     padding: 25px 45px 25px 40px;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(9) > div > div > p{
-    background: #002b36; /*Testing Data Shape*/
+    background: #AFE1AF; /*Testing Data Shape*/
     color: #ffffff;
-    border: solid 3px #002b36;
+    border: solid 3px #AFE1AF;
     width: 19.2em;
     border-radius: 10px;
     padding: 25px 45px 25px 40px;
@@ -36,7 +44,8 @@ head > style:nth-child(14){
 }
 
 div.st-emotion-cache-6qob1r.eczjsme3 { /*Menu List (Not FULL Selector)*/
-    background: #002b36;
+    background-color: #ffffff;
+    box-shadow: 0 0 0.9em 0.05em black;
     color: white;
 }
 
@@ -50,25 +59,30 @@ button.st-emotion-cache-1uqyhna.ef3psqc11{
     align-items: center;
 }
 
+/*SVG Menu X*/
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-69l7hj.eczjsme2 > button > svg{
+    color: #0b6122;
+}
+
 div.st-emotion-cache-1r6slb0.e1f1d6gn1{ /* RF XGBoost Performance Model*/
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #002b36;
+    color: #AFE1AF;
     background-color: white;
-    border: 4px solid #002b36;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
     border-radius: 14px;
     padding:15px 15px 15px 12%;
     margin: 3% 0 3% 0;
 }
 
 div.st-emotion-cache-1xzm5la.e1nzilvr5{
-    color: #002b36;
+    color: #0b6122;
 }
 
 div.st-emotion-cache-nuq5nq.eczjsme11{
-    background-color: white;
-    color: white;
+    color: #0b6122;
+    background-color:#0b6122;
 }
 
 /*Rerun Buttons*/
@@ -78,8 +92,8 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div > button:hover{
     scale: 1.1;
-    color: white;
-    background-color: #002b36;
+    color:#ffffff ;
+    background-color: #AFE1AF;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(40) > div > button{
     transition: scale 0.5s ease-in;
@@ -87,6 +101,6 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(40) > div > button:hover{
     scale: 1.1;
-    color: white;
-    background-color: #002b36;
+    color:#ffffff;
+    background-color: #AFE1AF;
 }
