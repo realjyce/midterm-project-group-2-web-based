@@ -178,6 +178,7 @@ if menu == "Raw Data":
     # MODEL
 if menu == "Model":
     st.sidebar.header("Choose Machine Learning Model")
+    st.markdown('''*Pick Model and Run it!:balloon:*''')
     model_option = st.sidebar.selectbox("Select Model", ["Random Forest", "XGBoost"])
     
     if model_option == "Random Forest":
@@ -188,6 +189,7 @@ if menu == "Model":
 
     st.sidebar.header("Run Model and Evaluate Results")
     if st.sidebar.button("Run Model"):
+        st.title("Histogram of Errors")
         # Split the data into training and testing sets based on the selected ratio
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
         
@@ -208,21 +210,31 @@ if menu == "Model":
         st.write(f"R^2 Score: {r2}")
 
         # Histogram of errors
-        plt.figure()
-        raw_data_error = sns.histplot(X, kde=True)
+        st.subheader("Flood Histogram")
+        raw_data_error = sns.histplot(X, bins=50, kde=True)
+        plt.title('Histogram of Flood Data')
+        plt.xlabel(" ")
+        plt.ylabel(" ")
         st.pyplot(raw_data_error.figure)
-
-        plt.figure()
+        st.subheader("Predicted Histogram")
         pred_error = sns.histplot(y_test - y_pred, kde=True)
+        plt.title('Histogram of Predicted Data')
+        plt.xlabel(" ")
+        plt.ylabel(" ")
         st.pyplot(pred_error.figure)
 
         # Feature Importance
         st.subheader("Feature Importance")
+        plt.title('Feature Importance')
+        plt.xlabel(" ")
+        plt.ylabel(" ")
         feature_importance = model.feature_importances_
         importance_df = pd.DataFrame({"Feature": df_1.columns, "Importance": feature_importance})
         importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
         st.pyplot(importance_chart.figure)
-# Hide Watermark
+        
+        
+# Hide Visibility
 hide_made_with_streamlit = """
     <style>
         #MainMenu{visibility: hidden;}
@@ -231,4 +243,5 @@ hide_made_with_streamlit = """
         footer {visibility:hidden;}
     </style>
 """
+
 st.markdown(hide_made_with_streamlit, unsafe_allow_html=True)
