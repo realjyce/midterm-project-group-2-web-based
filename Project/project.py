@@ -32,8 +32,12 @@ df = load_data('./project/Data.csv')
 
 df_1 = df.iloc[:, :-1]
 X = df_1
-y_train = None
-y_test = None
+y = df.iloc[:, -1]  # Assuming the last column is the dependent variable
+
+# Initialize variables outside if statements
+X_train, X_test, y_train, y_test = None, None, None, None
+model = None
+train_ratio = 0.8  # Default value, can be adjusted based on preference
 
 # MENU-ING AND TITLE
 menu = st.sidebar.radio("Menu",["Home", "Raw Data", "Model"])
@@ -204,9 +208,13 @@ if menu == "Model":
         st.write(f"R^2 Score: {r2}")
 
         # Histogram of errors
-        st.subheader("Histogram of Errors")
-        error_hist = sns.histplot(y_test - y_pred, kde=True)
-        st.pyplot(error_hist.figure)
+        plt.figure()
+        raw_data_error = sns.histplot(X, kde=True)
+        st.pyplot(raw_data_error.figure)
+
+        plt.figure()
+        pred_error = sns.histplot(y_test - y_pred, kde=True)
+        st.pyplot(pred_error.figure)
 
         # Feature Importance
         st.subheader("Feature Importance")
