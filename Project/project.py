@@ -170,6 +170,50 @@ if menu == "Raw Data":
     st.write(f"MAE: {mae_xgb_train:.2f}")
     st.write(f"R2: {r2_xgb_train:.2f}")
     st.button('Rerun All')
+    
+    # MODEL
+if menu == "Model":
+    st.sidebar.header("Choose Machine Learning Model")
+    model_option = st.sidebar.selectbox("Select Model", ["Random Forest", "XGBoost"])
+    
+    if model_option == "Random Forest":
+        model = RandomForestRegressor()
+
+    if model_option == "XGBoost":
+        model = XGBRegressor()  # Initialize XGBoost model
+
+    st.sidebar.header("Run Model and Evaluate Results")
+    if st.sidebar.button("Run Model"):
+        # Split the data into training and testing sets based on the selected ratio
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+        
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        
+        from sklearn.metrics import mean_squared_error
+        from sklearn.metrics import mean_absolute_error
+        from sklearn.metrics import r2_score
+
+        # Evaluation metrics
+        rmse = mean_squared_error(y_test, y_pred)
+        mae = mean_absolute_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
+
+        st.write(f"RMSE: {rmse}")
+        st.write(f"MAE: {mae}")
+        st.write(f"R^2 Score: {r2}")
+
+        # Histogram of errors
+        st.subheader("Histogram of Errors")
+        error_hist = sns.histplot(y_test - y_pred, kde=True)
+        st.pyplot(error_hist.figure)
+
+        # Feature Importance
+        st.subheader("Feature Importance")
+        feature_importance = model.feature_importances_
+        importance_df = pd.DataFrame({"Feature": df_1.columns, "Importance": feature_importance})
+        importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
+        st.pyplot(importance_chart.figure)
 # Hide Watermark
 hide_made_with_streamlit = """
     <style>
