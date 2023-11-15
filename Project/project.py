@@ -43,8 +43,12 @@ train_ratio = 0.8  # Default value, can be adjusted based on preference
 menu = st.sidebar.radio("Menu",["Home", "Raw Data", "Model"])
 if menu=="Home":
     st.title("Project 2B: Web-App Machine Learning with Python")
-    st.header("Head Overview Data")
+    st.header("Data Overview")
+    st.subheader("Head Data")
     st.write(df.head())
+    st.subheader("Tail Data")
+    st.write(df.tail())
+    st.write(df.dtypes)
 #RAW DATA
 if menu == "Raw Data":
     title = st.title('Raw Data for [Flood]')

@@ -6,6 +6,11 @@ footer {visibility:hidden;}
     font-family: 'Inter Sans', sans-serif;
 }
 
+/*MALFORMED OVERVIEW DATA FIX*/
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div{
+    background-color: none;
+}
+
 /*RADIOS AND SELECT*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div{
     /*Data Ratio Radio*/
