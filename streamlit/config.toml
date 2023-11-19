@@ -1,4 +1,38 @@
-[theme]
-base="light"
-primaryColor="#626277"
-backgroundColor="#1b1a30"
+[server]
+port = 8501
+cookieSecret = "a-random-key-appears-here"
+
+[client]
+caching = true
+displayEnabled = true
+showErrorDetails = true
+toolbarMode = "auto"
+
+[browser]
+gatherUsageStats = true
+serverAddress = "localhost"
+serverPort = 8501
+
+[global]
+disableWatchdogWarning = false
+disableWidgetStateDuplicationWarning = false
+showWarningOnDirectExecution = true
+dataFrameSerialization = "arrow"
+
+[logger]
+level = "info"
+messageFormat = "%(asctime)s %(message)s"
+
+[mapbox]
+token=''
+
+[runner]
+magicEnabled = true
+fixMatplotlib = true
+fastReruns = true
+runOnSave = true
+enableCORS = true
+enableXsrfProtection = true
+maxUploadSize = 200
+maxMessageSize = 200
+enableWebsocketCompression = false
