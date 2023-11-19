@@ -149,6 +149,15 @@ if menu == "New Data":
         new_data = pd.read_csv(uploaded_file)
     # Perform any necessary preprocessing to align with the model's requirements
     # Assuming the preprocessing steps are done to align the columns and data type
+        if model is None:
+            st.warning("Please select and run a model before making predictions.")
+        else:
+            predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
+            new_data['Predicted_Output'] = predictions
+
+            # Displaying Map with Heatmap Layer
+            st.header("Density Heat Map based on Predictions")
+            st.map(new_data)
 
     if st.button("Predict on New Data"):
         predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
