@@ -28,7 +28,7 @@ def load_data(url):
     df = pd.read_csv(url)
     return df
 
-df = load_data('./Data.csv')
+df = load_data('./project/Data.csv')
 
 df_1 = df.iloc[:, :-1]
 X = df_1
