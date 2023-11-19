@@ -1,7 +1,7 @@
 import streamlit as st
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
-with open('./style.css') as f:
+with open('./project/style.css') as f:
     css = f.read()
 
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
@@ -18,13 +18,17 @@ from streamlit_option_menu import option_menu
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
 
+# Function to convert DataFrame to CSV data
+def convert_df(df):
+    return df.to_csv(index=False).encode('utf-8')
+
 # DATA CACHING
 @st.cache_data
 def load_data(url):
     df = pd.read_csv(url)
     return df
 
-df = load_data('./Data.csv')
+df = load_data('./project/Data.csv')
 
 df_1 = df.iloc[:, :-1]
 X = df_1
@@ -53,7 +57,7 @@ if menu == "Home":
 if menu == "Raw Data":
     title = st.title('Raw Data for [Flood]')
     st.dataframe(df)
-    
+
     # Allow user to select the training and testing data ratio
     st.subheader('Select Training and Testing Data Ratio')
     ratio_option = st.selectbox("Data Ratio:", ["90:10", "80:20", "70:30", "60:40"])
@@ -70,22 +74,25 @@ if menu == "Raw Data":
 
     # Split the data into training and testing sets based on the selected ratio
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+    
+    st.subheader("Data Shape:")
+    col1, col2, col3 = st.columns((1,1,3))
 
-    st.write("Data Shape:")
-    
     # Display the shape of the training data
-    st.write("Training Data Shape:", X_train.shape)
-    
+    with col1:
+        st.write("Training Data Shape:", X_train.shape)
+
     # Display the shape of the testing data
-    st.write("Testing Data Shape:", X_test.shape)
+    with col2:
+        st.write("Testing Data Shape:", X_test.shape)
 
     # Display the training and testing data separately
     st.subheader("Training Data")
     st.dataframe(X_train)
-    
+
     st.subheader("Testing Data")
     st.dataframe(X_test)
-    
+
     if st.button('Rerun'):
         st.experimental_rerun()
 
@@ -93,7 +100,7 @@ if menu == "Raw Data":
 if menu == "Model":
     st.header("Choose Machine Learning Model")
     model_option = st.selectbox("Select Model", ["Random Forest", "XGBoost"])
-    
+
     if model_option == "Random Forest":
         model = RandomForestRegressor()
 
@@ -104,42 +111,79 @@ if menu == "Model":
     if st.button("Run Model"):
         # Split the data into training and testing sets based on the selected ratio
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
-        
+
         model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-        
+        y_train_pred = model.predict(X_train)
+        y_test_pred = model.predict(X_test)
+
         from sklearn.metrics import mean_squared_error
         from sklearn.metrics import mean_absolute_error
         from sklearn.metrics import r2_score
 
-        # Evaluation metrics
-        rmse = mean_squared_error(y_test, y_pred)
-        mae = mean_absolute_error(y_test, y_pred)
-        r2 = r2_score(y_test, y_pred)
-        
-        st.divider()
-        col1, col2, col3 = st.columns(3)
-        
-        col1.metric("RMSE", value=rmse)
-        col2.metric("MAE", value=mae)
-        col3.metric("R2 Score", value=r2)
-        st.divider()
-        
-        col1, col2 = st.columns((1,1))
+        # Evaluation metrics for training data
+        rmse_train = mean_squared_error(y_train, y_train_pred)
+        mae_train = mean_absolute_error(y_train, y_train_pred)
+        r2_train = r2_score(y_train, y_train_pred)
 
-        # Histogram of errors
+        # Evaluation metrics for testing data
+        rmse_test = mean_squared_error(y_test, y_test_pred)
+        mae_test = mean_absolute_error(y_test, y_test_pred)
+        r2_test = r2_score(y_test, y_test_pred)
+
+        st.divider()
+        
+        st.header("Evaluate Training Data")
+        col1, col2, col3 = st.columns(3)
+        col1.metric("RMSE", f'{rmse_train:.5f}')
+        col2.metric("MAE", f'{mae_train:.5f}')
+        col3.metric("R2 Score", f'{r2_train:.5f}')
+        
+        st.divider()
+        
+        st.header("Evaluate Testing Data")
+        col1, col2, col3 = st.columns(3)
+        col1.metric("RMSE", f'{rmse_test:.5f}')
+        col2.metric("MAE", f'{mae_test:.5f}')
+        col3.metric("R2 Score", f'{r2_test:.5f}')
+
+        st.divider()
+
+        col1, col2, col3 = st.columns((1, 1, 1))
+
+        # Histogram of errors for training data
         with col1:
-            st.subheader("Histogram of Errors")
-            error_hist = sns.histplot(y_test - y_pred, kde=True)
-            st.pyplot(error_hist.figure)
+            st.subheader("Histogram of Errors (Training)")
+            error_hist_train = sns.histplot(y_train - y_train_pred, kde=True)
+            st.pyplot(error_hist_train.figure)
+
+        # Histogram of errors for testing data
+        with col2:
+            st.subheader("Histogram of Errors (Testing)")
+            error_hist_test = sns.histplot(y_test - y_test_pred, kde=True)
+            st.pyplot(error_hist_test.figure)
 
         # Feature Importance
-        with col2:
+        with col3:
             st.subheader("Feature Importance")
+
+            # Update to use column names from the loaded CSV file
+            feature_names = df_1.columns
             feature_importance = model.feature_importances_
-            importance_df = pd.DataFrame({"Feature": df_1.columns, "Importance": feature_importance})
+            importance_df = pd.DataFrame({"Feature": feature_names, "Importance": feature_importance})
+
+            # Bar chart
             importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
             st.pyplot(importance_chart.figure)
+
+        # Export predicted values to CSV
+        csv_data = convert_df(pd.DataFrame({"Actual (Test)": y_test, "Predicted (Test)": y_test_pred}))
+        st.download_button(
+            label="Download Predictions as CSV",
+            data=csv_data,
+            file_name='predictions.csv',
+            mime='text/csv',
+        )
+        
 #New Data Upload
 if menu == "New Data":
    # New Data Upload Section
@@ -153,19 +197,53 @@ if menu == "New Data":
     if st.button("Predict on New Data"):
         predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
         new_data['Predicted_Output'] = predictions
+    # Split the data into training and testing sets based on the selected ratio
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+
+        model.fit(X_train, y_train)
+        y_train_pred = model.predict(X_train)
+        y_test_pred = model.predict(X_test)
+
+        from sklearn.metrics import mean_squared_error
+        from sklearn.metrics import mean_absolute_error
+        from sklearn.metrics import r2_score
+
+        # Evaluation metrics for training data
+        rmse_train = mean_squared_error(y_train, y_train_pred)
+        mae_train = mean_absolute_error(y_train, y_train_pred)
+        r2_train = r2_score(y_train, y_train_pred)
+
+        # Evaluation metrics for testing data
+        rmse_test = mean_squared_error(y_test, y_test_pred)
+        mae_test = mean_absolute_error(y_test, y_test_pred)
+        r2_test = r2_score(y_test, y_test_pred)
+
+        st.divider()
+        
+        st.header("Evaluate Training Data")
+        col1, col2, col3 = st.columns(3)
+        col1.metric("RMSE", f'{rmse_train:.5f}')
+        col2.metric("MAE", f'{mae_train:.5f}')
+        col3.metric("R2 Score", f'{r2_train:.5f}')
+        
+        st.divider()
+        
+        st.header("Evaluate Testing Data")
+        col1, col2, col3 = st.columns(3)
+        col1.metric("RMSE", f'{rmse_test:.5f}')
+        col2.metric("MAE", f'{mae_test:.5f}')
+        col3.metric("R2 Score", f'{r2_test:.5f}')
 
         # Displaying Map with Heatmap Layer
         st.header("Density Heat Map based on Predictions")
         st.map(new_data)
 
-
 # Hide Watermark
 hide_made_with_streamlit = """
     <style>
         #MainMenu{visibility: hidden;}
-
-
         footer {visibility:hidden;}
     </style>
 """
 st.markdown(hide_made_with_streamlit, unsafe_allow_html=True)
+
