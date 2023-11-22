@@ -6,6 +6,7 @@ with open('./project/style.css') as f:
 
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
+import altair as alt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import ssl
@@ -52,10 +53,12 @@ if menu == "Home":
     st.title("Project 2B: Web-App Machine Learning with Python")
     st.header("Head Overview Data")
     st.write(df.head())
+    st.header("Data Description")
+    st.write(df.describe())
 
 # RAW DATA
 if menu == "Raw Data":
-    title = st.title('Raw Data for [Flood]')
+    title = st.title('[Flood]')
     st.dataframe(df)
 
     # Allow user to select the training and testing data ratio
@@ -88,10 +91,22 @@ if menu == "Raw Data":
 
     # Display the training and testing data separately
     st.subheader("Training Data")
-    st.dataframe(X_train)
+    tab1a, tab1b, tab1c = st.tabs(['Chart','DataFrame','Export'])
+    with tab1a:
+        st.bar_chart(X_train)
+    with tab1b:
+        st.write(X_train)
+    with tab1c:
+        st
 
     st.subheader("Testing Data")
-    st.dataframe(X_test)
+    tab2a, tab2b, tab2c = st.tabs(['Chart','DataFrame','Export'])
+    with tab2a:
+        st.bar_chart(X_test)
+    with tab2b:
+        st.write(X_test)
+    with tab2c:
+        st
 
     if st.button('Rerun'):
         st.experimental_rerun()
