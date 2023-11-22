@@ -14,13 +14,14 @@ footer {visibility:hidden;}
     background-color: none;
 }
 
-/*RADIOS AND SELECT*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.glideDataEditor.wzg2m5k{
     /*Head Overview*/
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.259);
 }
 
+
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-10oheav.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(3) > div > div > div{
+    
     background: #AFE1AF;
     color: white;
     border: none;
@@ -38,6 +39,8 @@ footer {visibility:hidden;}
     width: 20em;
     max-width: 22em;
     border-radius: 10px;
+    margin-block-start: 2em;
+    margin-left: 120%;
     padding: 25px 45px 25px 40px;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.st-emotion-cache-ocqkz7.e1f1d6gn3 > div:nth-child(2) > div:nth-child(1) > div > div > div > div > p{
@@ -50,6 +53,8 @@ footer {visibility:hidden;}
     width: 20em;
     max-width: 22em;
     border-radius: 10px;
+    margin-block-start: 2em;
+    margin-left: 155%;
     padding: 25px 45px 25px 40px;
 }
 
@@ -105,12 +110,30 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 }
 
 /*Rerun Buttons*/
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > button{
+    transition: scale 350ms ease-in;
+    transition: all 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > button:hover{
+    scale: 1.01;
+    color:#ffffff ;
+    background-color: #AFE1AF;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(16) > div > button{
+    transition: scale 350ms ease-in;
+    transition: all 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(16) > div > button:hover{
+    scale: 1.01;
+    color:#ffffff ;
+    background-color: #AFE1AF;
+}
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div > button{
     transition: scale 350ms ease-in;
     transition: all 350ms ease;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div > button:hover{
-    scale: 1.04;
+    scale: 1.01;
     color:#ffffff ;
     background-color: #AFE1AF;
 }
@@ -119,7 +142,7 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
     transition: all 350ms ease;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(40) > div > button:hover{
-    scale: 1.04;
+    scale: 1.01;
     color:#ffffff;
     background-color: #AFE1AF;
 }
@@ -129,7 +152,7 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
     color: #0b6122;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-10oheav.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(5) > div > button:hover{
-    scale: 1.04;
+    scale: 1.01;
     color:#ffffff;
     background-color: #AFE1AF;
 }

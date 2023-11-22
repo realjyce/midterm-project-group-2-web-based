@@ -53,7 +53,7 @@ if menu == "Home":
     st.title("Project 2B: Web-App Machine Learning with Python")
     st.header("Head Overview Data")
     st.write(df.head())
-    st.header("Data Description")
+    st.header("Data Summary")
     st.write(df.describe())
 
 # RAW DATA
@@ -77,7 +77,6 @@ if menu == "Raw Data":
 
     # Split the data into training and testing sets based on the selected ratio
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
-    
     st.subheader("Data Shape:")
     col1, col2, col3 = st.columns((1,1,3))
 
@@ -89,6 +88,7 @@ if menu == "Raw Data":
     with col2:
         st.write("Testing Data Shape:", X_test.shape)
 
+    st.divider()
     # Display the training and testing data separately
     st.subheader("Training Data")
     tab1a, tab1b, tab1c = st.tabs(['Chart','DataFrame','Export'])
@@ -97,7 +97,15 @@ if menu == "Raw Data":
     with tab1b:
         st.write(X_train)
     with tab1c:
-        st
+        train_data = X_train.to_csv(index=False)
+        st.download_button(
+            label="Download Train as CSV",
+            data=train_data,
+            file_name='train.csv',
+            mime='text/csv',
+        )
+    
+    st.divider()
 
     st.subheader("Testing Data")
     tab2a, tab2b, tab2c = st.tabs(['Chart','DataFrame','Export'])
@@ -106,7 +114,13 @@ if menu == "Raw Data":
     with tab2b:
         st.write(X_test)
     with tab2c:
-        st
+        test_data = X_test.to_csv(index=False)
+        st.download_button(
+            label="Download test as CSV",
+            data=test_data,
+            file_name='test.csv',
+            mime='text/csv',
+        )
 
     if st.button('Rerun'):
         st.experimental_rerun()
