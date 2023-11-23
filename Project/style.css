@@ -77,24 +77,12 @@ button.st-emotion-cache-1uqyhna.ef3psqc11{
     color: #0b6122;
 }
 
-div.st-emotion-cache-1r6slb0.e1f1d6gn1{ /* RF XGBoost Performance Model*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #AFE1AF;
-    background-color: white;
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
-    border-radius: 14px;
-    padding:15px 15px 15px 12%;
-    margin: 3% 0 3% 0;
-    transition: opacity 350ms linear, scale 350ms ease;
-}
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(17):has(div:hover) > div:not(:hover){
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10):has(div:hover) > div:not(:hover){
     /*Model Performance Non-Hover Blocks*/
     opacity: 0.5;
     scale: 0.87;
 }
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(19):has(div:hover) > div:not(:hover){
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13):has(div:hover) > div:not(:hover){
     /*Model Performance Non-Hover Blocks*/
     opacity: 0.5;
     scale: 0.87;
@@ -168,4 +156,83 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 /*Tables*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(4) > div > div > div > div.glideDataEditor.wzg2m5k,#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(11) > div > div > div > div.glideDataEditor.wzg2m5k, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div > div > div > div.glideDataEditor.wzg2m5k,#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(21) > div > div > div > div.glideDataEditor.wzg2m5k,#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(23) > div > div > div > div.glideDataEditor.wzg2m5k{
     box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
+}
+
+/*Cards and Hovers*/
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10) > div:nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #AFE1AF;
+    background-color: white;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
+    border-radius: 14px;
+    padding:15px 15px 15px 12%;
+    margin: 3% 0 3% 0;
+    transition: opacity 350ms linear, scale 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10) > div:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #AFE1AF;
+    background-color: white;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
+    border-radius: 14px;
+    padding:15px 15px 15px 12%;
+    margin: 3% 0 3% 0;
+    transition: opacity 350ms linear, scale 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10) > div:nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #AFE1AF;
+    background-color: white;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
+    border-radius: 14px;
+    padding:15px 15px 15px 12%;
+    margin: 3% 0 3% 0;
+    transition: opacity 350ms linear, scale 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div:nth-child(1){ /* RF XGBoost Performance Model*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #AFE1AF;
+    background-color: white;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
+    border-radius: 14px;
+    padding:15px 15px 15px 12%;
+    margin: 3% 0 3% 0;
+    transition: opacity 350ms linear, scale 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #AFE1AF;
+    background-color: white;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
+    border-radius: 14px;
+    padding:15px 15px 15px 12%;
+    margin: 3% 0 3% 0;
+    transition: opacity 350ms linear, scale 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div:nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #AFE1AF;
+    background-color: white;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
+    border-radius: 14px;
+    padding:15px 15px 15px 12%;
+    margin: 3% 0 3% 0;
+    transition: opacity 350ms linear, scale 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div > div{
+    margin: 0;
+    padding: 0;
+    box-shadow: 0;
 }
