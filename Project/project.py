@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(layout="wide", initial_sidebar_state="expanded", page_icon="chart_with_upwards_trend", page_title="Flood")
 
 with open('./project/style.css') as f:
     css = f.read()
@@ -15,6 +15,7 @@ from permetrics.regression import RegressionMetric
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor  # Import XGBoost
 from streamlit_option_menu import option_menu
+import streamlit_extras
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -88,10 +89,9 @@ if menu == "Raw Data":
     with col2:
         st.write("Testing Data Shape:", X_test.shape)
 
-    st.divider()
     # Display the training and testing data separately
     st.subheader("Training Data")
-    tab1a, tab1b, tab1c = st.tabs(['Chart','DataFrame','Export'])
+    tab1a, tab1b, tab1c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
     with tab1a:
         st.bar_chart(X_train)
     with tab1b:
@@ -99,16 +99,14 @@ if menu == "Raw Data":
     with tab1c:
         train_data = X_train.to_csv(index=False)
         st.download_button(
-            label="Download Train as CSV",
+            label="💾 Download Train.csv",
             data=train_data,
             file_name='train.csv',
             mime='text/csv',
         )
-    
-    st.divider()
 
     st.subheader("Testing Data")
-    tab2a, tab2b, tab2c = st.tabs(['Chart','DataFrame','Export'])
+    tab2a, tab2b, tab2c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
     with tab2a:
         st.bar_chart(X_test)
     with tab2b:
@@ -116,7 +114,7 @@ if menu == "Raw Data":
     with tab2c:
         test_data = X_test.to_csv(index=False)
         st.download_button(
-            label="Download test as CSV",
+            label="💾Download Test.csv",
             data=test_data,
             file_name='test.csv',
             mime='text/csv',
