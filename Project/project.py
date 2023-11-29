@@ -16,6 +16,10 @@ from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor  # Import XGBoost
 from streamlit_option_menu import option_menu
 import streamlit_extras
+import time
+
+#Download Display
+display_success = False
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -56,6 +60,10 @@ if menu == "Home":
     st.write(df.head())
     st.header("Data Summary")
     st.write(df.describe())
+    st.header("Data Values")
+    st.write(df.value_counts(subset=None, normalize=False, sort=True, ascending=False, dropna=True))
+    st.header("Data Keys")
+    st.write(df.keys())
 
 # RAW DATA
 if menu == "Raw Data":
@@ -69,12 +77,16 @@ if menu == "Raw Data":
     # Map the selected ratio to a train-test split ratio
     if ratio_option == "90:10":
         train_ratio = 0.9
+        st.toast('Running...')
     elif ratio_option == "80:20":
         train_ratio = 0.8
+        st.toast('Running...')
     elif ratio_option == "70:30":
         train_ratio = 0.7
+        st.toast('Running...')
     elif ratio_option == "60:40":
         train_ratio = 0.6
+        st.toast('Running...')
 
     # Split the data into training and testing sets based on the selected ratio
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
@@ -98,12 +110,14 @@ if menu == "Raw Data":
         st.write(X_train)
     with tab1c:
         train_data = X_train.to_csv(index=False)
-        st.download_button(
+        download1 = st.download_button(
             label="💾 Download Train.csv",
             data=train_data,
             file_name='train.csv',
             mime='text/csv',
         )
+        if download1:
+            st.success("Download Successful!")
 
     st.subheader("Testing Data")
     tab2a, tab2b, tab2c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
@@ -113,15 +127,21 @@ if menu == "Raw Data":
         st.write(X_test)
     with tab2c:
         test_data = X_test.to_csv(index=False)
-        st.download_button(
+        download2 = st.download_button(
             label="💾Download Test.csv",
             data=test_data,
             file_name='test.csv',
             mime='text/csv',
         )
+        if download2:
+            st.success("Download Successful!")
+        
 
     if st.button('Rerun'):
         st.experimental_rerun()
+        st.toast('Done!')
+        
+    st.toast('Done!')
 
 # MODEL
 if menu == "Model":
@@ -137,6 +157,9 @@ if menu == "Model":
     st.header("Run Model and Evaluate Results")
     if st.button("Run Model"):
         # Split the data into training and testing sets based on the selected ratio
+        st.toast('Running Code...')
+        with st.spinner(text='Loading...'):
+            time.sleep(1)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
 
         model.fit(X_train, y_train)
@@ -172,7 +195,7 @@ if menu == "Model":
         col1.metric("RMSE", f'{rmse_test:.5f}')
         col2.metric("MAE", f'{mae_test:.5f}')
         col3.metric("R2 Score", f'{r2_test:.5f}')
-
+     
         st.divider()
 
         col1, col2, col3 = st.columns((1, 1, 1))
@@ -201,16 +224,27 @@ if menu == "Model":
             # Bar chart
             importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
             st.pyplot(importance_chart.figure)
+            
+        st.toast('Done!')
 
         # Export predicted values to CSV
         csv_data = convert_df(pd.DataFrame({"Actual (Test)": y_test, "Predicted (Test)": y_test_pred}))
-        st.download_button(
+        download3 = st.download_button(
             label="Download Predictions as CSV",
             data=csv_data,
             file_name='predictions.csv',
             mime='text/csv',
-        )
-
+        ) 
+        if download3: st.success("Download Successful!")
+        
+st.markdown(
+    """
+    <div style="font-size: 13px;position: absolute; left:44%; bottom: -180px; width: 13%; text-align: center; color: #FFFFFF; box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.259); border-radius: 15px; background: #AFE1AF;">
+        <u>Made by Group 2B💚</u>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 # Hide Watermark
 hide_made_with_streamlit = """
     <style>
