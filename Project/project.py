@@ -239,8 +239,8 @@ if menu == "Model":
         
 st.markdown(
     """
-    <div style="font-size: 13px;position: absolute; left:44%; bottom: -180px; width: 13%; text-align: center; color: #FFFFFF; box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.259); border-radius: 15px; background: #AFE1AF;">
-        <u>Made by Group 2B💚</u>
+    <div style="font-size: 13px;position: absolute; left:44%; bottom: -180px; width: 13%; text-align: center; color: #FFFFFF; box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.259); border-radius: 15px; background: #006fff;">
+        <u>Made by Group 2B🩵</u>
     </div>
     """,
     unsafe_allow_html=True,

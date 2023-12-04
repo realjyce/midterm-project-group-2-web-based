@@ -22,16 +22,16 @@ footer {visibility:hidden;}
 
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-10oheav.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(3) > div > div > div{
     
-    background: #AFE1AF;
+    background: #006fff;
     color: white;
     border: none;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.259);
     cursor: pointer;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.st-emotion-cache-ocqkz7.e1f1d6gn3 > div:nth-child(1) > div:nth-child(1) > div > div > div > div > p{
-    background: #AFE1AF; /*Training Data Shape*/
+    background: #006fff; /*Training Data Shape*/
     color: #ffffff;
-    border: solid 3px #AFE1AF;
+    border: solid 3px #006fff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
     width: 21em;
     max-width: 23em;
@@ -42,10 +42,10 @@ footer {visibility:hidden;}
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.st-emotion-cache-ocqkz7.e1f1d6gn3 > div:nth-child(2) > div:nth-child(1) > div > div > div > div > p{
     /*Testing Data Shape*/
-    background: #AFE1AF; 
+    background: #006fff; 
     margin-block-end: 1.75em;
     color: #ffffff;
-    border: solid 3px #AFE1AF;
+    border: solid 3px #006fff;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
     width: 21em;
     max-width: 23em;
@@ -54,6 +54,8 @@ footer {visibility:hidden;}
     margin-left: 175%;
     padding: 25px 45px 25px 40px;
 }
+
+
 head > style:nth-child(14){
     color: white;
 }
@@ -70,7 +72,7 @@ button.st-emotion-cache-1uqyhna.ef3psqc11{
 
 /*SVG Menu X*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-69l7hj.eczjsme2 > button > svg{
-    color: #0b6122;
+    color: #006fff;
 }
 
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10):has(div:hover) > div:not(:hover){
@@ -85,12 +87,12 @@ button.st-emotion-cache-1uqyhna.ef3psqc11{
 }
 
 div.st-emotion-cache-1xzm5la.e1nzilvr5{
-    color: #0b6122;
+    color: #006fff;
 }
 
 div.st-emotion-cache-nuq5nq.eczjsme11{
-    color: #0b6122;
-    background-color:#0b6122;
+    color: #006fff;
+    background-color:#006fff;
 }
 
 /*Rerun Buttons*/
@@ -100,7 +102,7 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > button:hover{
     scale: 1.01;
     color:#ffffff;
-    background-color: #AFE1AF;
+    background-color: #006fff;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(16) > div > button{
     transition: scale 350ms ease-in, opacity 350ms linear, color 350ms ease-in-out;
@@ -108,7 +110,7 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(16) > div > button:hover{
     scale: 1.01;
     color:#ffffff ;
-    background-color: #AFE1AF;
+    background-color: #006fff;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div > button{
         transition: scale 350ms ease-in, opacity 350ms linear, color 350ms ease-in-out;
@@ -116,7 +118,7 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div > button:hover{
     scale: 1.01;
     color:#ffffff ;
-    background-color: #AFE1AF;
+    background-color: #006fff;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(40) > div > button{
     transition: scale 350ms ease-in, opacity 350ms linear;
@@ -124,7 +126,7 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(40) > div > button:hover{
     scale: 1.01;
     color:#ffffff;
-    background-color: #AFE1AF;
+    background-color: #006fff;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-10oheav.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(5) > div > button{
     transition: scale 350ms ease-in, opacity 350ms linear;
@@ -133,7 +135,7 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-10oheav.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(5) > div > button:hover{
     scale: 1.01;
     color:#ffffff;
-    background-color: #AFE1AF;
+    background-color: #006fff;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-10oheav.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(5) > div > button:active{
     visibility: hidden;
@@ -141,7 +143,10 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 
 /*SVG Images*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.st-emotion-cache-vk3wp9.eczjsme11 > div.st-emotion-cache-6qob1r.eczjsme3 > div.st-emotion-cache-10oheav.eczjsme4 > div > div:nth-child(1) > div > div:nth-child(3) > div > div > div > div.st-ct.st-cl.st-b3.st-c7.st-bt.st-e2.st-dg > svg, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.st-ct.st-cl.st-b3.st-c7.st-bt.st-e2.st-dg > svg, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.st-cv.st-cl.st-b3.st-c7.st-bt.st-e4.st-di > svg{
-    color: white; /*Arrow SVGs*/
+    color: #006fff; /*Arrow SVGs*/
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5) > div > div > div > div.st-bf.st-bg.st-b3.st-d1.st-c2.st-d2.st-c7 > svg{
+    color: #006fff; /*Arrow SVGs*/
 }
 
 /*Tables*/
@@ -151,27 +156,32 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 
 /*SelectBoxes*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div{
-    width: 9%;
-}
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div > div > div.st-bt.st-bf.st-b3.st-e8.st-bv.st-e9.st-dq > svg{
-    color: white;
+    width: 11%;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5) > div > div > div{
     width: 16%;
-}
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5) > div > div > div,#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5) > div > div > div > div.st-bt.st-bf.st-b3.st-e8.st-bv.st-e9.st-dq > svg{
-    color: white;
+    border: solid 1px #006fff;
+    border-radius: 8px;
 }
 
 /*Fixes*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10) > div:nth-child(1) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10) > div:nth-child(2) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10) > div:nth-child(3) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div:nth-child(1) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div:nth-child(2) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div:nth-child(3) > div:nth-child(1) > div > div > div{
-    color: #AFE1AF;
+    color: #006fff;
     background-color: white;
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
     border-radius: 14px;
     padding:15px 15px 15px 12%;
     margin: 3% 0 3% 0;
     transition: opacity 350ms linear, scale 350ms ease;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > header > div.st-emotion-cache-zq5wmm.ezrtsby0 > div.stDeployButton > button{
+    content: 'Flood;'
+
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5) > div{
+    border: none;
+    border-radius: 8px;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(10){
     transition: opacity 350ms linear, scale 350ms ease;
