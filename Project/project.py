@@ -48,8 +48,8 @@ train_ratio = 0.8  # Default value, can be adjusted based on preference
 # MENU-ING AND TITLE
 menu = option_menu(
     menu_title=None,
-    options=["Home", "Raw Data", "Model"],
-    icons=["house", "database", "play"],
+    options=["Home", "Raw Data", "Model", "Predictions"],
+    icons=["house", "database", "file-earmark-bar-graph","play"],
     menu_icon="cast",
     orientation="horizontal",
     )
