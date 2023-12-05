@@ -237,6 +237,36 @@ if menu == "Model":
         ) 
         if download3: st.success("Download Successful!")
         
+        
+        
+if menu == "Predictions":
+   # New Data Upload Section
+    st.header("Predict on New Data")
+    uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
+    if uploaded_file is not None:
+        new_data = pd.read_csv(uploaded_file)
+    # Perform any necessary preprocessing to align with the model's requirements
+    # Assuming the preprocessing steps are done to align the columns and data type
+        if model is None:
+            st.warning("Please select and run a model before making predictions.")
+        else:
+            predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
+            new_data['Predicted_Output'] = predictions
+
+            # Displaying Map with Heatmap Layer
+            st.header("Density Heat Map based on Predictions")
+            st.map(new_data)
+
+    if st.button("Predict on New Data"):
+        predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
+        new_data['Predicted_Output'] = predictions
+
+        # Displaying Map with Heatmap Layer
+        st.header("Density Heat Map based on Predictions")
+        st.map(new_data)
+
+
+        
 st.markdown(
     """
     <div style="font-size: 13px;position: absolute; left:44%; bottom: -180px; width: 13%; text-align: center; color: #FFFFFF; box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.259); border-radius: 15px; background: #006fff;">
