@@ -10,9 +10,10 @@ import altair as alt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import ssl
-import seaborn as sns
+import seaborn as sns 
 from permetrics.regression import RegressionMetric
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor # Import RandomForestRegressor
+from sklearn.exceptions import NotFittedError
 from xgboost import XGBRegressor  # Import XGBoost
 from streamlit_option_menu import option_menu
 import streamlit_extras
@@ -290,17 +291,20 @@ if menu == "Predictions":
 
         else:
             st.warning("Please train the model before making predictions.")
-    else:
-        st.warning("Please select a model for predictions.")
+
+    def load_model():
+        model = None
+        return model
 
     uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
     if uploaded_file is not None:
         new_data = pd.read_csv(uploaded_file)
-    # Perform any necessary preprocessing to align with the model's requirements
-    # Assuming the preprocessing steps are done to align the columns and data type
         if model is None:
-            st.warning("Please select and run a model before making predictions.")
+            st.success("Uploaded")
+        elif uploaded_file is None:
+            st.warning("Please upload a CSV file for prediction.")
         else:
+            new_data = pd.read_csv(uploaded_file)
             predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
             new_data['Predicted_Output'] = predictions
 
@@ -309,12 +313,36 @@ if menu == "Predictions":
             st.map(new_data)
 
     if st.button("Predict on New Data"):
-        predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
-        new_data['Predicted_Output'] = predictions
+        if model is None:
+            st.warning("Please select and run a model before making predictions.")
+        else:
+            predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
+            new_data['Predicted_Output'] = predictions
 
-        # Displaying Map with Heatmap Layer
-        st.header("Density Heat Map based on Predictions")
-        st.map(new_data)
+            # Displaying Map with Deck.gl (Mapbox) Layer
+            st.header("Density Heat Map based on Predictions")
+            st.deck_gl_chart(
+            viewport={
+                'latitude': new_data['LATITUDE'].mean(),
+                'longitude': new_data['longitude'].mean(),
+                'zoom': 10,
+                'pitch': 50,
+            },
+            layers=[{
+                'type': 'HeatmapLayer',
+                'data': new_data,
+                'getPosition': ['longitude', 'LATITUDE'],
+                'getWeight': 'Predicted_Output',
+                'radius': 20,
+                'intensity': 1,
+                'colorRange': [
+                    [0, 255, 0],
+                    [0, 255, 0],
+                    [0, 255, 0],
+                    [0, 255, 0],
+                ],
+            }],
+        )
 
 
         
