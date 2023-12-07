@@ -1,9 +1,9 @@
 import streamlit as st
+import os
 st.set_page_config(layout="wide", initial_sidebar_state="expanded", page_icon="chart_with_upwards_trend", page_title="Flood")
-
-with open('./project/style.css') as f:
+with open('./css/style.css') as f:
     css = f.read()
-
+    print(css)
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 import altair as alt

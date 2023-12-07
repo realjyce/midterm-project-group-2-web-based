@@ -3,14 +3,11 @@ port = 8501
 cookieSecret = "a-random-key-appears-here"
 
 [theme]
-base="light"
 primaryColor="#ffffff"
 secondaryBackgroundColor="#afe1af"
 textColor="#0b6122"
 
 [client]
-caching = true
-displayEnabled = true
 showErrorDetails = true
 toolbarMode = "auto"
 
@@ -20,7 +17,6 @@ serverAddress = "localhost"
 serverPort = 8501
 
 [global]
-disableWatchdogWarning = false
 disableWidgetStateDuplicationWarning = false
 showWarningOnDirectExecution = true
 dataFrameSerialization = "arrow"
