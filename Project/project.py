@@ -242,6 +242,56 @@ if menu == "Model":
 if menu == "Predictions":
    # New Data Upload Section
     st.header("Predict on New Data")
+    st.header("Predictions")
+    st.subheader("Head Overview NewData")
+    st.write(df_new.head())
+
+    # Model selection in the "Predictions" section
+    st.subheader("Select Model for Predictions")
+    prediction_model_option = st.selectbox("Select Model", ["Random Forest", "XGBoost"])
+
+    prediction_model = None
+    if prediction_model_option == "Random Forest":
+        prediction_model = RandomForestRegressor()
+    elif prediction_model_option == "XGBoost":
+        prediction_model = XGBRegressor()
+
+    if prediction_model is not None:
+        # Train the model before making predictions
+        if st.button("Train Model for Predictions"):
+            # Assuming that the columns in df_new are similar to the training data
+            # If not, you may need to preprocess df_new accordingly
+            X_train, _, y_train, _ = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+            prediction_model.fit(X_train, y_train)
+
+        # Check if the model is fitted before making predictions
+        if hasattr(prediction_model, 'predict'):
+            try:
+                # Assuming that the columns in df_new are similar to the training data
+                # If not, you may need to preprocess df_new accordingly
+                new_data_predictions = prediction_model.predict(df_new)
+
+                # Display predictions
+                st.subheader("Predictions on NewData")
+                st.write(pd.DataFrame({"Predicted Flood": new_data_predictions}))
+
+                # You can also provide a download button for the predictions
+                predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
+                st.download_button(
+                    label="Download Predictions on NewData as CSV",
+                    data=predictions_csv_data,
+                    file_name='new_data_predictions.csv',
+                    mime='text/csv',
+                )
+
+            except NotFittedError:
+                st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+
+        else:
+            st.warning("Please train the model before making predictions.")
+    else:
+        st.warning("Please select a model for predictions.")
+
     uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
     if uploaded_file is not None:
         new_data = pd.read_csv(uploaded_file)
