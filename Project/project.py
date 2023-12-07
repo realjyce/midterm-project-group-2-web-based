@@ -35,6 +35,7 @@ def load_data(url):
     return df
 
 df = load_data('./project/Data.csv')
+df_new = load_data('./project/NewData.csv')
 
 df_1 = df.iloc[:, :-1]
 X = df_1
