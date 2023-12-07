@@ -200,6 +200,9 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
     padding:15px 15px 15px 12%;
     margin: 3% 0 3% 0;
 }
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) > div > div > div > div.glideDataEditor.wzg2m5k{
+    box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
+}
 
 /*SelectBoxes*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div > div{
