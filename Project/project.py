@@ -18,6 +18,10 @@ from xgboost import XGBRegressor  # Import XGBoost
 from streamlit_option_menu import option_menu
 import streamlit_extras
 import time
+import geopandas as gpd
+from shapely.geometry import shape
+import matplotlib.pyplot as plt
+import plotly.express as px
 
 #Download Display
 display_success = False
@@ -40,12 +44,12 @@ df_new = load_data('./project/NewData.csv')
 
 df_1 = df.iloc[:, :-1]
 X = df_1
-y = df.iloc[:, -1]  # Assuming the last column is the dependent variable
+y = df.iloc[:, -1]  # Assuming last col is dependent var
 
-# Initialize variables outside if statements
+# Initialize variables outside (GLOBAL)
 X_train, X_test, y_train, y_test = None, None, None, None
 model = None
-train_ratio = 0.8  # Default value, can be adjusted based on preference
+train_ratio = 0.8  # DEFAULT VALUE
 
 # MENU-ING AND TITLE
 menu = option_menu(
@@ -72,11 +76,11 @@ if menu == "Raw Data":
     title = st.title('[Flood]')
     st.dataframe(df)
 
-    # Allow user to select the training and testing data ratio
+    # User: selectbox the training and testing data ratio
     st.subheader('Select Training and Testing Data Ratio')
     ratio_option = st.selectbox("Data Ratio:", ["90:10", "80:20", "70:30", "60:40"])
 
-    # Map the selected ratio to a train-test split ratio
+    # Map the according ratio to a train-test split ratio
     if ratio_option == "90:10":
         train_ratio = 0.9
         st.toast('Running...')
@@ -95,11 +99,11 @@ if menu == "Raw Data":
     st.subheader("Data Shape:")
     col1, col2, col3 = st.columns((1,1,3))
 
-    # Display the shape of the training data
+    # Training data shape + Display
     with col1:
         st.write("Training Data Shape:", X_train.shape)
 
-    # Display the shape of the testing data
+     # Testing data shape + Display
     with col2:
         st.write("Testing Data Shape:", X_test.shape)
 
@@ -158,7 +162,7 @@ if menu == "Model":
 
     st.header("Run Model and Evaluate Results")
     if st.button("Run Model"):
-        # Split the data into training and testing sets based on the selected ratio
+        # Split the data into training and testing sets based on the selected ratio, again.(for LOCAL scope)
         st.toast('Running Code...')
         with st.spinner(text='Loading...'):
             time.sleep(1)
@@ -172,12 +176,12 @@ if menu == "Model":
         from sklearn.metrics import mean_absolute_error
         from sklearn.metrics import r2_score
 
-        # Evaluation metrics for training data
+        # Metrics for training data
         rmse_train = mean_squared_error(y_train, y_train_pred)
         mae_train = mean_absolute_error(y_train, y_train_pred)
         r2_train = r2_score(y_train, y_train_pred)
 
-        # Evaluation metrics for testing data
+        # Metrics for testing data
         rmse_test = mean_squared_error(y_test, y_test_pred)
         mae_test = mean_absolute_error(y_test, y_test_pred)
         r2_test = r2_score(y_test, y_test_pred)
@@ -203,9 +207,10 @@ if menu == "Model":
         col1, col2, col3 = st.columns((1, 1, 1))
 
         # Histogram of errors for training data
+    
         with col1:
             st.subheader("Histogram of Errors (Training)")
-            error_hist_train = sns.histplot(y_train - y_train_pred, kde=True)
+            error_hist_train = sns.histplot(y_train - y_train_pred, kde=True, figure=plt.figure(figsize=(7, 7)))
             st.pyplot(error_hist_train.figure)
 
         # Histogram of errors for testing data
@@ -229,7 +234,7 @@ if menu == "Model":
             
         st.toast('Done!')
 
-        # Export predicted values to CSV
+        # Export predicted val in CSV format
         csv_data = convert_df(pd.DataFrame({"Actual (Test)": y_test, "Predicted (Test)": y_test_pred}))
         download3 = st.download_button(
             label="Download Predictions as CSV",
@@ -242,13 +247,13 @@ if menu == "Model":
         
         
 if menu == "Predictions":
-   # New Data Upload Section
+   # Upload Section | NEWDATA
     st.header("Predict on New Data")
     st.header("Predictions")
     st.subheader("Head Overview NewData")
     st.write(df_new.head())
 
-    # Model selection in the "Predictions" section
+    # Model selection for prediction
     st.subheader("Select Model for Predictions")
     prediction_model_option = st.selectbox("Select Model", ["Random Forest", "XGBoost"])
 
@@ -259,25 +264,27 @@ if menu == "Predictions":
         prediction_model = XGBRegressor()
 
     if prediction_model is not None:
-        # Train the model before making predictions
+        # Train the model, before predicting
         if st.button("Train Model for Predictions"):
-            # Assuming that the columns in df_new are similar to the training data
-            # If not, you may need to preprocess df_new accordingly
-            X_train, _, y_train, _ = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+            # If cols in df_new are == to the training data
+            with st.spinner(text='Loading...'):
+                time.sleep(1)
+            st.toast("Running...")
+            X_train, _, y_train, _ = train_test_split(X, y, test_size=1 - train_ratio, random_state=42) # If not, repeat training process
             prediction_model.fit(X_train, y_train)
+            st.toast("Done!")
 
-        # Check if the model is fitted before making predictions
-        if hasattr(prediction_model, 'predict'):
+        # Check model fitting before predictions
+        if hasattr(prediction_model, 'predict'): #has attribute of 'predict'
             try:
-                # Assuming that the columns in df_new are similar to the training data
-                # If not, you may need to preprocess df_new accordingly
-                new_data_predictions = prediction_model.predict(df_new)
+                # If cols in df_new are == to the training data
+                new_data_predictions = prediction_model.predict(df_new)# If not, preprocess
 
                 # Display predictions
-                st.subheader("Predictions on NewData")
+                st.subheader("Predictions on New Data")
                 st.write(pd.DataFrame({"Predicted Flood": new_data_predictions}))
 
-                # You can also provide a download button for the predictions
+                # Download button for predictions (.csv)
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
                 st.download_button(
                     label="Download Predictions on NewData as CSV",
@@ -296,54 +303,37 @@ if menu == "Predictions":
         model = None
         return model
 
+    import pydeck as pdk
     uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
     if uploaded_file is not None:
         new_data = pd.read_csv(uploaded_file)
+
         if model is None:
             st.success("Uploaded")
-        elif uploaded_file is None:
-            st.warning("Please upload a CSV file for prediction.")
-        else:
-            new_data = pd.read_csv(uploaded_file)
-            predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
-            new_data['Predicted_Output'] = predictions
+            # Train the model, before predicting
+        if st.button("Train Uploaded Model for Predictions"):
+            # If cols in df_new are == to the training data
+            with st.spinner(text='Loading...'):
+                time.sleep(1)
+            st.toast("Running...")
+            X_train, _, y_train, _ = train_test_split(X, y, test_size=1 - train_ratio, random_state=42) # If not, repeat training process
+            prediction_model.fit(X_train, y_train)
+            st.toast("Done!")
 
-            # Displaying Map with Heatmap Layer
-            st.header("Density Heat Map based on Predictions")
-            st.map(new_data)
+        # Check model fitting before predictions
+        if hasattr(prediction_model, 'predict'): #has attribute of 'predict'
+            try:
+                # If cols in df_new are == to the training data
+                uploaded_data_predictions = prediction_model.predict(new_data)# If not, preprocess
 
-    if st.button("Predict on New Data"):
-        if model is None:
-            st.warning("Please select and run a model before making predictions.")
-        else:
-            predictions = model.predict(new_data.drop(['latitude', 'longitude'], axis=1))
-            new_data['Predicted_Output'] = predictions
+                # Display predictions
+                st.subheader("Predictions on uploaded New Data")
+                st.write(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
 
-            # Displaying Map with Deck.gl (Mapbox) Layer
-            st.header("Density Heat Map based on Predictions")
-            st.deck_gl_chart(
-            viewport={
-                'latitude': new_data['LATITUDE'].mean(),
-                'longitude': new_data['longitude'].mean(),
-                'zoom': 10,
-                'pitch': 50,
-            },
-            layers=[{
-                'type': 'HeatmapLayer',
-                'data': new_data,
-                'getPosition': ['longitude', 'LATITUDE'],
-                'getWeight': 'Predicted_Output',
-                'radius': 20,
-                'intensity': 1,
-                'colorRange': [
-                    [0, 255, 0],
-                    [0, 255, 0],
-                    [0, 255, 0],
-                    [0, 255, 0],
-                ],
-            }],
-        )
-
+                # Download button for predictions (.csv)
+                predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
+            except NotFittedError:
+                st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
 
         
 st.markdown(

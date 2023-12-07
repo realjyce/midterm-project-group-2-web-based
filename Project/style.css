@@ -83,12 +83,12 @@ button.st-emotion-cache-1uqyhna.ef3psqc11{
     color: #006fff;
 }
 
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(11):has(div:hover) > div:not(:hover){
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(12):has(div:hover) > div:not(:hover){
     /*Model Performance Non-Hover Blocks*/
     opacity: 0.34;
     scale: 0.87;
 }
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14):has(div:hover) > div:not(:hover){
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(15):has(div:hover) > div:not(:hover){
     /*Model Performance Non-Hover Blocks*/
     opacity: 0.34;
     scale: 0.87;
@@ -191,6 +191,18 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(4) > div > div > div > div.glideDataEditor.wzg2m5k,#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(11) > div > div > div > div.glideDataEditor.wzg2m5k, #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(13) > div > div > div > div.glideDataEditor.wzg2m5k,#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(21) > div > div > div > div.glideDataEditor.wzg2m5k,#root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(23) > div > div > div > div.glideDataEditor.wzg2m5k{
     box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
 }
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div > div > div.glideDataEditor.wzg2m5k{
+    box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(9) > div > div > div > div.glideDataEditor.wzg2m5k{
+    box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(12) > div:nth-child(1) > div:nth-child(1) > div > div > div,#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(12) > div:nth-child(2) > div:nth-child(1) > div > div > div,#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(12) > div:nth-child(3) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(15) > div:nth-child(1) > div:nth-child(1) > div > div > div,#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(15) > div:nth-child(2) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(15) > div:nth-child(3) > div:nth-child(1) > div > div > div{
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
+    border-radius: 14px;
+    padding:15px 15px 15px 12%;
+    margin: 3% 0 3% 0;
+}
 
 /*SelectBoxes*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div > div{
@@ -234,7 +246,26 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
     width: 11em;
     color: #0003a9;
 }
-
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(17) > div:nth-child(3) > div:nth-child(1) > div > div:nth-child(2) > div > div > div > img{
+    margin-left: 2em;
+    padding-left:-5em;
+    margin-block-start: 3.6em;
+    scale: 1.18;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(17) > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(2) > div > div > div > img{
+    margin-block-start: 2em;
+}
+#feature-importance > div > span{
+    margin-left: 5em;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.st-bf.st-bg.st-bz.st-c0.st-c1.st-b3.st-c2.st-c3.st-bh.st-c4.st-c5.st-c6.st-c7{
+    border:#170e45 1px solid;
+    width: 20%;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(12) > div > div{
+    background: none;
+    box-shadow: none;
+}
 *, *::before, *::after{
     transition: opacity 350ms linear, scale 350ms ease;
 }
