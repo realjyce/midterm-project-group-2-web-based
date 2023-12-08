@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+config_file_path = "./project/config.toml"
 st.set_page_config(layout="wide", initial_sidebar_state="expanded", page_icon="chart_with_upwards_trend", page_title="Flood")
 with open('./css/style.css') as f:
     css = f.read()
