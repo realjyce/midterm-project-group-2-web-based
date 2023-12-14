@@ -265,6 +265,9 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
     border:#170e45 1px solid;
     width: 20%;
 }
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.st-bf.st-bg.st-bz.st-c0.st-c1.st-b3.st-c2.st-c3.st-bh.st-c4.st-c5.st-c6.st-c7{
+    border: none;
+}
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(12) > div > div{
     background: none;
     box-shadow: none;
