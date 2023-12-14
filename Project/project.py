@@ -286,8 +286,11 @@ if menu == "Predictions":
 
                 # Display predictions
                 st.subheader("Predictions on New Data")
-                st.write(pd.DataFrame({"Predicted Flood": new_data_predictions}))
-
+                df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
+                st.write(df_results)
+                # DENSITY MAP with plotly
+                fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                st.plotly_chart(fig)
                 # Download button for predictions (.csv)
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
                 st.download_button(
@@ -307,7 +310,6 @@ if menu == "Predictions":
         model = None
         return model
 
-    import pydeck as pdk
     uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
     if uploaded_file is not None:
         new_data = pd.read_csv(uploaded_file)
@@ -332,8 +334,10 @@ if menu == "Predictions":
 
                 # Display predictions
                 st.subheader("Predictions on uploaded New Data")
-                st.write(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
-
+                df_results = pd.DataFrame({"Predicted Flood": uploaded_data_predictions})
+                st.write(df_results)
+                fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                st.plotly_chart(fig)
                 # Download button for predictions (.csv)
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
             except NotFittedError:
