@@ -23,7 +23,6 @@ import streamlit_extras #Extras
 import time #Extras
 #Graphics & Data Visualisation
 import seaborn as sns 
-import geopandas as gpd
 from shapely.geometry import shape
 import matplotlib.pyplot as plt
 import plotly.express as px
