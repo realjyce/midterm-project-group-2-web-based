@@ -1,12 +1,15 @@
+[tool.system]
+streamlit = "12.7.0"
+
 [server]
 port = 8501
 cookieSecret = "a-random-key-appears-here"
 
 [theme]
-primaryColor = "#FFFFFF"
-secondaryBackgroundColor = "#AFE1AF"
-textColor = "#0B6122"
-font =" Poppins"
+primaryColor = "#006FFF"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#0e2b6e"
+font = "Poppins"
 
 [client]
 showErrorDetails = true

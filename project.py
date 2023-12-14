@@ -2,10 +2,13 @@ import streamlit as st
 import os
 print("Current Working Directory:", os.getcwd())
 #Streamlit CONFIG
-config_file_path = "./.streamlit/config.toml"
+config_file_path = "$CWD/.streamlit/config.toml"
 st.set_page_config(layout="wide", initial_sidebar_state="expanded", page_icon="chart_with_upwards_trend", page_title="Flood")
 #Import CSS
-
+with open('./css/style.css') as f:
+    css = f.read()
+    
+st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 #Import Libs
 import pandas as pd
