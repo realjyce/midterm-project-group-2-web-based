@@ -1,31 +1,32 @@
 import streamlit as st
-import os
+
+#Streamlit CONFIG
 config_file_path = "./project/config.toml"
+
+#Import CSS
 st.set_page_config(layout="wide", initial_sidebar_state="expanded", page_icon="chart_with_upwards_trend", page_title="Flood")
 with open('./css/style.css') as f:
     css = f.read()
     print(css)
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
-import altair as alt
+#Import Libs
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import ssl
-import seaborn as sns 
-from permetrics.regression import RegressionMetric
+from permetrics.regression import RegressionMetric #Metrics
 from sklearn.ensemble import RandomForestRegressor # Import RandomForestRegressor
 from sklearn.exceptions import NotFittedError
 from xgboost import XGBRegressor  # Import XGBoost
-from streamlit_option_menu import option_menu
-import streamlit_extras
-import time
+from streamlit_option_menu import option_menu #Extras
+import streamlit_extras #Extras
+import time #Extras
+#Graphics & Data Visualisation
+import seaborn as sns 
 import geopandas as gpd
 from shapely.geometry import shape
 import matplotlib.pyplot as plt
 import plotly.express as px
-
-#Download Display
-display_success = False
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -46,6 +47,8 @@ df_new = load_data('./project/NewData.csv')
 df_1 = df.iloc[:, :-1]
 X = df_1
 y = df.iloc[:, -1]  # Assuming last col is dependent var
+#Download Display For Download: SUCCESS!
+display_success = False
 
 # Initialize variables outside (GLOBAL)
 X_train, X_test, y_train, y_test = None, None, None, None
