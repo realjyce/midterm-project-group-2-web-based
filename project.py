@@ -1,10 +1,10 @@
 import streamlit as st
-
+import os
+print("Current Working Directory:", os.getcwd())
 #Streamlit CONFIG
-config_file_path = "./.streamlit/config.toml"
-
-#Import CSS
+config_file_path = "./,streamlit/config.toml"
 st.set_page_config(layout="wide", initial_sidebar_state="expanded", page_icon="chart_with_upwards_trend", page_title="Flood")
+#Import CSS
 with open('./css/style.css') as f:
     css = f.read()
     print(css)

@@ -1,6 +1,3 @@
-[tool.system]
-streamlit = "^1.27.0"
-
 [server]
 port = 8501
 cookieSecret = "a-random-key-appears-here"
