@@ -3,9 +3,10 @@ port = 8501
 cookieSecret = "a-random-key-appears-here"
 
 [theme]
-primaryColor="#ffffff"
-secondaryBackgroundColor="#afe1af"
-textColor="#0b6122"
+primaryColor = "#FFFFFF"
+secondaryBackgroundColor = "#AFE1AF"
+textColor = "#0B6122"
+font =" Poppins"
 
 [client]
 showErrorDetails = true
@@ -26,7 +27,7 @@ level = "info"
 messageFormat = "%(asctime)s %(message)s"
 
 [mapbox]
-token=''
+token = ""
 
 [runner]
 magicEnabled = true
