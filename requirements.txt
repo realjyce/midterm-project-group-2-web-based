@@ -10,4 +10,4 @@ streamlit_extras
 seaborn
 matplotlib
 plotly
-shapely
+shapely==2.0.2
