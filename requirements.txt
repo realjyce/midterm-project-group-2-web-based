@@ -10,4 +10,3 @@ streamlit_extras
 seaborn
 matplotlib
 plotly
-os
