@@ -1,0 +1,12 @@
+streamlit==1.27.0
+pandas
+numpy
+pandas
+scikit-learn
+permetrics
+xgboost
+streamlit_option_menu
+streamlit_extras
+seaborn
+matplotlib
+plotly

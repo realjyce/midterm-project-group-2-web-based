@@ -1,7 +1,7 @@
 import streamlit as st
 
 #Streamlit CONFIG
-config_file_path = "./project/config.toml"
+config_file_path = "./.streamlit/config.toml"
 
 #Import CSS
 st.set_page_config(layout="wide", initial_sidebar_state="expanded", page_icon="chart_with_upwards_trend", page_title="Flood")
