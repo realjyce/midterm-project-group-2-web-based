@@ -3,13 +3,11 @@ streamlit = "12.7.0"
 
 [server]
 port = 8501
-cookieSecret = "a-random-key-appears-here"
 
 [theme]
 primaryColor = "#006FFF"
 secondaryBackgroundColor = "#FFFFFF"
 textColor = "#0a0a36"
-font = "Poppins"
 
 [client]
 showErrorDetails = true
