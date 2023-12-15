@@ -15,6 +15,7 @@ import ssl
 from permetrics.regression import RegressionMetric #Metrics
 from sklearn.ensemble import RandomForestRegressor # Import RandomForestRegressor
 from sklearn.exceptions import NotFittedError
+import xgboost as xgb
 from xgboost import XGBRegressor  # Import XGBoost
 from streamlit_option_menu import option_menu #Extras
 import streamlit_extras #Extras
