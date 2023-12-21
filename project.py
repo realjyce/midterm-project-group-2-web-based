@@ -159,7 +159,15 @@ if menu == "Model":
     if model_option == "Random Forest":
         model = RandomForestRegressor()
     if model_option == "XGBoost":
-        model = XGBRegressor()  # Initialize XGBoost model
+        model = XGBRegressor(  
+        learning_rate=0.1,      
+        n_estimators=100,       
+        max_depth=3,            
+        min_child_weight=1,     
+        subsample=0.8,          
+        colsample_bytree=0.8,   
+        objective='reg:squarederror',
+        random_state=42)
 
     st.header("Run Model and Evaluate Results")
     if st.button("Run Model"):
@@ -262,7 +270,15 @@ if menu == "Predictions":
     if prediction_model_option == "Random Forest":
         prediction_model = RandomForestRegressor()
     elif prediction_model_option == "XGBoost":
-        prediction_model = XGBRegressor()
+        prediction_model = model = XGBRegressor(  
+        learning_rate=0.1,      
+        n_estimators=100,       
+        max_depth=3,            
+        min_child_weight=1,     
+        subsample=0.8,          
+        colsample_bytree=0.8,   
+        objective='reg:squarederror',
+          random_state=42)
 
     if prediction_model is not None:
         # Train the model, before predicting
