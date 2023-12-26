@@ -15,7 +15,6 @@ import ssl
 from permetrics.regression import RegressionMetric #Metrics
 from sklearn.ensemble import RandomForestRegressor # Import RandomForestRegressor
 from sklearn.exceptions import NotFittedError
-import xgboost as xgb
 from xgboost import XGBRegressor  # Import XGBoost
 from streamlit_option_menu import option_menu #Extras
 import streamlit_extras #Extras
@@ -63,7 +62,7 @@ menu = option_menu(
     )
 
 if menu == "Home":
-    st.title("Project 2B: Web-App Machine Learning with Python")
+    st.title("Web-Based Machine Learning Application")
     st.header("Head Overview Data")
     st.write(df.head())
     st.header("Data Summary")
@@ -75,7 +74,7 @@ if menu == "Home":
 
 # RAW DATA
 if menu == "Raw Data":
-    title = st.title('[Flood]')
+    title = st.title('Input Data')
     st.dataframe(df)
 
     # User: selectbox the training and testing data ratio
@@ -257,7 +256,7 @@ if menu == "Model":
         
 if menu == "Predictions":
    # Upload Section | NEWDATA
-    st.header("Predict on New Data")
+    st.header("Predict on Study Area")
     st.header("Predictions")
     st.subheader("Head Overview NewData")
     st.write(df_new.head())
@@ -356,15 +355,6 @@ if menu == "Predictions":
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
 
-        
-st.markdown(
-    """
-    <div style="font-size: 13px;position: absolute; left:44%; bottom: -180px; width: 13%; text-align: center; color: #FFFFFF; box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.259); border-radius: 15px; background: #006fff;">
-        <u>Made by Group 2B🩵</u>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 # Hide Watermark
 hide_made_with_streamlit = """
     <style>
