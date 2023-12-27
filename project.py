@@ -303,29 +303,28 @@ if menu == "Predictions":
                 st.subheader("Predictions on New Data")
                 df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
                 st.write(df_results)
+                # Download button for predictions (.csv)
+                predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
+                # DENSITY MAP with plotly
                 st.download_button(
                     label="Download Predictions on NewData as CSV",
                     data=predictions_csv_data,
                     file_name='new_data_predictions.csv',
                     mime='text/csv',
                 )
-                # DENSITY MAP with plotly
-                fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
-                st.plotly_chart(fig)
-                # Download button for predictions (.csv)
-                predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
                 if st.button("Show Heatmap"):
                     heatmap_data = df_results.copy()
                     heatmap_data["Latitude"] = new_data["Latitude"]  # Replace with the actual column names in your DataFrame
                     heatmap_data["Longitude"] = new_data["Longitude"]
-
+                    
                     map = leafmap.Map()
                     heatmap_layer = leafmap.Heatmap(data=heatmap_data, latitude="Latitude", longitude="Longitude", value="Predicted Flood")
                     map.add_layer(heatmap_layer)
-
+            
                     st.write(map)
-                
-
+                fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                st.plotly_chart(fig)
+                    
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
 
