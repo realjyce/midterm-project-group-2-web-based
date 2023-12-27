@@ -26,6 +26,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 #Heatmap
 import folium
+import leafmap
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -57,8 +58,8 @@ train_ratio = 0.8  # DEFAULT VALUE
 # MENU-ING AND TITLE
 menu = option_menu(
     menu_title=None,
-    options=["Home", "Raw Data", "Model", "Predictions", "Heatmap"],
-    icons=["house", "database", "file-earmark-bar-graph","play","fire"],
+    options=["Home", "Raw Data", "Model", "Predictions"],
+    icons=["house", "database", "file-earmark-bar-graph","play"],
     menu_icon="cast",
     orientation="horizontal",
     )
@@ -356,17 +357,16 @@ if menu == "Predictions":
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+    if st.button("Show Heatmap"):
+         heatmap_data = df_results.copy()
+         heatmap_data["Latitude"] = new_data["Latitude"]  # Replace with the actual column names in your DataFrame
+         heatmap_data["Longitude"] = new_data["Longitude"]
+         
+         map = leafmap.Map()
+         heatmap_layer = leafmap.Heatmap(data=heatmap_data, latitude="Latitude", longitude="Longitude", value="Predicted Flood")
+         map.add_layer(heatmap_layer)
 
-if menu == "Heatmap":
-    def heatmap():
-        st.title("HeatMap")
-        map = folium.Map(location=[37.7749, -122.4194], zoom_start=12)
-        folium.Marker(location=[37.7749, -122.4194], popup="San Francisco").add_to(map)
-        
-        folium_static(map)
-
-    if __name__ == "__heatmap__":
-        heatmap()
+         st.write(map)
 
 # Hide Watermark
 hide_made_with_streamlit = """
