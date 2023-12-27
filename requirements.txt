@@ -12,3 +12,4 @@ matplotlib
 plotly
 shapely==2.0.2
 folium
+leafmap
