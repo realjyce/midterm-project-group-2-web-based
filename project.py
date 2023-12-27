@@ -314,6 +314,16 @@ if menu == "Predictions":
                     file_name='new_data_predictions.csv',
                     mime='text/csv',
                 )
+                if st.button("Show Heatmap"):
+                    heatmap_data = df_results.copy()
+                    heatmap_data["Latitude"] = new_data["Latitude"]  # Replace with the actual column names in your DataFrame
+                    heatmap_data["Longitude"] = new_data["Longitude"]
+
+                    map = leafmap.Map()
+                    heatmap_layer = leafmap.Heatmap(data=heatmap_data, latitude="Latitude", longitude="Longitude", value="Predicted Flood")
+                    map.add_layer(heatmap_layer)
+
+                    st.write(map)
 
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
@@ -357,16 +367,6 @@ if menu == "Predictions":
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
-    if st.button("Show Heatmap"):
-         heatmap_data = df_results.copy()
-         heatmap_data["Latitude"] = new_data["Latitude"]  # Replace with the actual column names in your DataFrame
-         heatmap_data["Longitude"] = new_data["Longitude"]
-         
-         map = leafmap.Map()
-         heatmap_layer = leafmap.Heatmap(data=heatmap_data, latitude="Latitude", longitude="Longitude", value="Predicted Flood")
-         map.add_layer(heatmap_layer)
-
-         st.write(map)
 
 # Hide Watermark
 hide_made_with_streamlit = """
