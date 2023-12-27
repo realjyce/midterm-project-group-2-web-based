@@ -25,7 +25,7 @@ from shapely.geometry import shape
 import matplotlib.pyplot as plt
 import plotly.express as px
 #Heatmap
-import leafmap
+from leafmap import leafmap
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
