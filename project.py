@@ -12,6 +12,7 @@ st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import ssl
+from sklearn.impute import SimpleImputer
 from permetrics.regression import RegressionMetric #Metrics
 from sklearn.ensemble import RandomForestRegressor # Import RandomForestRegressor
 from sklearn.exceptions import NotFittedError
@@ -25,8 +26,7 @@ from shapely.geometry import shape
 import matplotlib.pyplot as plt
 import plotly.express as px
 #Heatmap
-import folium
-import leafmap
+import leafmap.foliumap as leafmap
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -296,7 +296,6 @@ if menu == "Predictions":
         # Check model fitting before predictions
         if hasattr(prediction_model, 'predict'): #has attribute of 'predict'
             try:
-                # If cols in df_new are == to the training data
                 new_data_predictions = prediction_model.predict(df_new)# If not, preprocess
 
                 # Display predictions
@@ -305,23 +304,15 @@ if menu == "Predictions":
                 st.write(df_results)
                 # Download button for predictions (.csv)
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
-                # DENSITY MAP with plotly
+                
                 st.download_button(
                     label="Download Predictions on NewData as CSV",
                     data=predictions_csv_data,
                     file_name='new_data_predictions.csv',
                     mime='text/csv',
                 )
-                heatmap_data = df_results.copy()
-                heatmap_data["Latitude"] = new_data["Latitude"]  # Replace with the actual column names in your DataFrame
-                heatmap_data["Longitude"] = new_data["Longitude"]
                 
-                map = leafmap.Map()
-                heatmap_layer = leafmap.Heatmap(data=heatmap_data, latitude="Latitude", longitude="Longitude", value="Predicted Flood")
-                map.add_layer(heatmap_layer)
-     
-                st.write(map)
-                fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                fig = px.imshow([new_data_predictions], title='Heatmap of Predicted')
                 st.plotly_chart(fig)
                     
             except NotFittedError:
