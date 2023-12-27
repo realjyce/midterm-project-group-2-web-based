@@ -66,92 +66,106 @@ menu = option_menu(
 
 if menu == "Home":
     st.title("Web-Based Machine Learning Application")
-    st.header("Head Overview Data")
-    st.write(df.head())
-    st.header("Data Summary")
-    st.write(df.describe())
-    st.header("Data Values")
-    st.write(df.value_counts(subset=None, normalize=False, sort=True, ascending=False, dropna=True))
-    st.header("Data Keys")
-    st.write(df.keys())
+
+    # Data Input Section
+    st.header("Data Input")
+
+    uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
+
+    if uploaded_file is not None:
+        df = load_data(uploaded_file)
+
+        # Display Data Overview
+        st.header("Head Overview Data")
+        st.write(df.head())
+        st.header("Data Summary")
+        st.write(df.describe())
+        st.header("Data Values")
+        st.write(df.value_counts(subset=None, normalize=False, sort=True, ascending=False, dropna=True))
+        st.header("Data Keys")
+        st.write(df.keys())
 
 # RAW DATA
 if menu == "Raw Data":
     title = st.title('Input Data')
-    st.dataframe(df)
+    
+    # Data Input Section
+    uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
-    # User: selectbox the training and testing data ratio
-    st.subheader('Select Training and Testing Data Ratio')
-    ratio_option = st.selectbox("Data Ratio:", ["90:10", "80:20", "70:30", "60:40"])
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
 
-    # Map the according ratio to a train-test split ratio
-    if ratio_option == "90:10":
-        train_ratio = 0.9
-        st.toast('Running...')
-    elif ratio_option == "80:20":
-        train_ratio = 0.8
-        st.toast('Running...')
-    elif ratio_option == "70:30":
-        train_ratio = 0.7
-        st.toast('Running...')
-    elif ratio_option == "60:40":
-        train_ratio = 0.6
-        st.toast('Running...')
+        # User: selectbox the training and testing data ratio
+        st.subheader('Select Training and Testing Data Ratio')
+        ratio_option = st.selectbox("Data Ratio:", ["90:10", "80:20", "70:30", "60:40"])
 
-    # Split the data into training and testing sets based on the selected ratio
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
-    st.subheader("Data Shape:")
-    col1, col2, col3 = st.columns((1,1,3))
+        # Map the according ratio to a train-test split ratio
+        if ratio_option == "90:10":
+            train_ratio = 0.9
+            st.toast('Running...')
+        elif ratio_option == "80:20":
+            train_ratio = 0.8
+            st.toast('Running...')
+        elif ratio_option == "70:30":
+            train_ratio = 0.7
+            st.toast('Running...')
+        elif ratio_option == "60:40":
+            train_ratio = 0.6
+            st.toast('Running...')
 
-    # Training data shape + Display
-    with col1:
-        st.write("Training Data Shape:", X_train.shape)
+        # Split the data into training and testing sets based on the selected ratio
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+        st.subheader("Data Shape:")
+        col1, col2, col3 = st.columns((1,1,3))
 
-     # Testing data shape + Display
-    with col2:
-        st.write("Testing Data Shape:", X_test.shape)
+        # Training data shape + Display
+        with col1:
+            st.write("Training Data Shape:", X_train.shape)
 
-    # Display the training and testing data separately
-    st.subheader("Training Data")
-    tab1a, tab1b, tab1c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
-    with tab1a:
-        st.bar_chart(X_train)
-    with tab1b:
-        st.write(X_train)
-    with tab1c:
-        train_data = X_train.to_csv(index=False)
-        download1 = st.download_button(
-            label="💾 Download Train.csv",
-            data=train_data,
-            file_name='train.csv',
-            mime='text/csv',
-        )
-        if download1:
-            st.success("Download Successful!")
+         # Testing data shape + Display
+        with col2:
+            st.write("Testing Data Shape:", X_test.shape)
 
-    st.subheader("Testing Data")
-    tab2a, tab2b, tab2c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
-    with tab2a:
-        st.bar_chart(X_test)
-    with tab2b:
-        st.write(X_test)
-    with tab2c:
-        test_data = X_test.to_csv(index=False)
-        download2 = st.download_button(
-            label="💾Download Test.csv",
-            data=test_data,
-            file_name='test.csv',
-            mime='text/csv',
-        )
-        if download2:
-            st.success("Download Successful!")
-        
+        # Display the training and testing data separately
+        st.subheader("Training Data")
+        tab1a, tab1b, tab1c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
+        with tab1a:
+            st.bar_chart(X_train)
+        with tab1b:
+            st.write(X_train)
+        with tab1c:
+            train_data = X_train.to_csv(index=False)
+            download1 = st.download_button(
+                label="💾 Download Train.csv",
+                data=train_data,
+                file_name='train.csv',
+                mime='text/csv',
+            )
+            if download1:
+                st.success("Download Successful!")
 
-    if st.button('Rerun'):
-        st.experimental_rerun()
+        st.subheader("Testing Data")
+        tab2a, tab2b, tab2c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
+        with tab2a:
+            st.bar_chart(X_test)
+        with tab2b:
+            st.write(X_test)
+        with tab2c:
+            test_data = X_test.to_csv(index=False)
+            download2 = st.download_button(
+                label="💾Download Test.csv",
+                data=test_data,
+                file_name='test.csv',
+                mime='text/csv',
+            )
+            if download2:
+                st.success("Download Successful!")
+
+        if st.button('Rerun'):
+            st.experimental_rerun()
+            st.toast('Done!')
+
         st.toast('Done!')
-        
-    st.toast('Done!')
 
 # MODEL
 if menu == "Model":
