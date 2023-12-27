@@ -11,4 +11,4 @@ seaborn
 matplotlib
 plotly
 shapely==2.0.2
-leafmap
+folium

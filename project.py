@@ -25,7 +25,7 @@ from shapely.geometry import shape
 import matplotlib.pyplot as plt
 import plotly.express as px
 #Heatmap
-from leafmap import leafmap
+import folium
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -359,16 +359,14 @@ if menu == "Predictions":
 
 if menu == "Heatmap":
     def heatmap():
-        st.title("Heatmap")
-        map = leafmap.Map()
-        marker = leafmap.Marker(location=(37.7749, -122.4194), draggable=False)
-        map.add_layer(marker)
-
-        st.write(map)
+        st.title("HeatMap")
+        map = folium.Map(location=[37.7749, -122.4194], zoom_start=12)
+        folium.Marker(location=[37.7749, -122.4194], popup="San Francisco").add_to(map)
+        
+        folium_static(map)
 
     if __name__ == "__heatmap__":
         heatmap()
-        
 
 # Hide Watermark
 hide_made_with_streamlit = """
