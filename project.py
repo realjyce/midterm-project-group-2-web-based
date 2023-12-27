@@ -24,6 +24,8 @@ import seaborn as sns
 from shapely.geometry import shape
 import matplotlib.pyplot as plt
 import plotly.express as px
+#Heatmap
+import leafmap
 
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -55,8 +57,8 @@ train_ratio = 0.8  # DEFAULT VALUE
 # MENU-ING AND TITLE
 menu = option_menu(
     menu_title=None,
-    options=["Home", "Raw Data", "Model", "Predictions"],
-    icons=["house", "database", "file-earmark-bar-graph","play"],
+    options=["Home", "Raw Data", "Model", "Predictions", "Heatmap"],
+    icons=["house", "database", "file-earmark-bar-graph","play","fire"],
     menu_icon="cast",
     orientation="horizontal",
     )
@@ -257,7 +259,7 @@ if menu == "Model":
 if menu == "Predictions":
    # Upload Section | NEWDATA
     st.header("Predict on Study Area")
-    st.header("Predictions")
+    st.subheader("Predictions")
     st.subheader("Head Overview NewData")
     st.write(df_new.head())
 
@@ -354,6 +356,19 @@ if menu == "Predictions":
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+
+if menu == "Heatmap":
+    def heatmap():
+        st.title("Heatmap")
+        map = leafmap.Map()
+        marker = leafmap.Marker(location=(37.7749, -122.4194), draggable=False)
+        map.add_layer(marker)
+
+        st.write(map)
+
+    if __name__ == "__heatmap__":
+        heatmap()
+        
 
 # Hide Watermark
 hide_made_with_streamlit = """
