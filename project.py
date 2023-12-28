@@ -274,11 +274,14 @@ if menu == "Model":
 if menu == "Predictions":
    # Upload Section | NEWDATA
     st.header("Predict on Study Area")
-    st.subheader("Predictions")
-    st.subheader("Head Overview NewData")
-    st.write(df_new.head())
-
-    # Model selection for prediction
+    st.subheader("Upload New Data!")
+    uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
+    if uploaded_file is not None:
+        new_data = pd.read_csv(uploaded_file)
+        st.write("Head of the DataFrame:")
+        st.write(new_data.head())    
+    
+        # Model Selct
     st.subheader("Select Model for Predictions")
     prediction_model_option = st.selectbox("Select Model", ["Random Forest", "XGBoost"])
 
@@ -295,53 +298,9 @@ if menu == "Predictions":
         colsample_bytree=0.8,   
         objective='reg:squarederror',
           random_state=42)
-
-    if prediction_model is not None:
-        # Train the model, before predicting
-        if st.button("Train Model for Predictions"):
-            # If cols in df_new are == to the training data
-            with st.spinner(text='Loading...'):
-                time.sleep(1)
-            st.toast("Running...")
-            X_train, _, y_train, _ = train_test_split(X, y, test_size=1 - train_ratio, random_state=42) # If not, repeat training process
-            prediction_model.fit(X_train, y_train)
-            st.toast("Done!")
-
-        # Check model fitting before predictions
-        if hasattr(prediction_model, 'predict'): #has attribute of 'predict'
-            try:
-                new_data_predictions = prediction_model.predict(df_new)# If not, preprocess
-
-                # Display predictions
-                st.subheader("Predictions on New Data")
-                df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
-                st.write(df_results)
-                # Download button for predictions (.csv)
-                predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
-                
-                st.download_button(
-                    label="Download Predictions on NewData as CSV",
-                    data=predictions_csv_data,
-                    file_name='new_data_predictions.csv',
-                    mime='text/csv',
-                )
-                
-                fig = px.imshow([new_data_predictions], title='Heatmap of Predicted')
-                st.plotly_chart(fig)
-                    
-            except NotFittedError:
-                st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
-
-        else:
-            st.warning("Please train the model before making predictions.")
-
     def load_model():
         model = None
         return model
-
-    uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
-    if uploaded_file is not None:
-        new_data = pd.read_csv(uploaded_file)
 
         if model is None:
             st.success("Uploaded")
@@ -366,6 +325,85 @@ if menu == "Predictions":
                 df_results = pd.DataFrame({"Predicted Flood": uploaded_data_predictions})
                 st.write(df_results)
                 fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                st.plotly_chart(fig)
+                fig = px.imshow([new_data_predictions], title='Heatmap of Predicted Flood')
+                st.plotly_chart(fig)
+                # Download button for predictions (.csv)
+                predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
+            except NotFittedError:
+                st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+    
+
+    if prediction_model is not None:
+        # Train the model, before predicting
+        if st.button("Train Model for Predictions"):
+            # If cols in df_new are == to the training data
+            with st.spinner(text='Loading...'):
+                time.sleep(1)
+            st.toast("Running...")
+            X_train, _, y_train, _ = train_test_split(X, y, test_size=1 - train_ratio, random_state=42) # If not, repeat training process
+            prediction_model.fit(X_train, y_train)
+            st.toast("Done!")
+
+        # Check model fitting before predictions
+        if hasattr(prediction_model, 'predict'): #has attribute of 'predict'
+            try:
+                new_data_predictions = prediction_model.predict(df_new)# If not, preprocess
+
+                # Display predictions
+                st.subheader("Predictions on Existing Data")
+                df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
+                st.write(df_results)
+                # Download button for predictions (.csv)
+                predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
+                
+                st.download_button(
+                    label="Download Predictions on NewData as CSV",
+                    data=predictions_csv_data,
+                    file_name='new_data_predictions.csv',
+                    mime='text/csv',
+                )
+                fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                st.plotly_chart(fig)
+                fig = px.imshow([new_data_predictions], title='Heatmap of Predicted')
+                st.plotly_chart(fig)
+                    
+            except NotFittedError:
+                st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+
+        else:
+            st.warning("Please train the model before making predictions.")
+            
+
+    def load_model():
+        model = None
+        return model
+
+        if model is None:
+            st.success("Uploaded")
+            # Train the model, before predicting
+        if st.button("Train Uploaded Model for Predictions"):
+            # If cols in df_new are == to the training data
+            with st.spinner(text='Loading...'):
+                time.sleep(1)
+            st.toast("Running...")
+            X_train, _, y_train, _ = train_test_split(X, y, test_size=1 - train_ratio, random_state=42) # If not, repeat training process
+            prediction_model.fit(X_train, y_train)
+            st.toast("Done!")
+
+        # Check model fitting before predictions
+        if hasattr(prediction_model, 'predict'): #has attribute of 'predict'
+            try:
+                # If cols in df_new are == to the training data
+                uploaded_data_predictions = prediction_model.predict(new_data)# If not, preprocess
+
+                # Display predictions
+                st.subheader("Predictions on uploaded New Data")
+                df_results = pd.DataFrame({"Predicted Flood": uploaded_data_predictions})
+                st.write(df_results)
+                fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                st.plotly_chart(fig)
+                fig = px.imshow([new_data_predictions], title='Heatmap of Predicted Flood')
                 st.plotly_chart(fig)
                 # Download button for predictions (.csv)
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
