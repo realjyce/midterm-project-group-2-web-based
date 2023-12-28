@@ -7,7 +7,6 @@ footer {visibility:hidden;}
 }
 
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5){
-    margin-top: -50px;
     margin-bottom:20px;
     color:#170e45;
 }
@@ -15,12 +14,20 @@ footer {visibility:hidden;}
     max-width: 30%;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) > div > div > div > div > div > div > p{
-    width: 2000%;
+    width: 200%;
+    color: black;
 }
-
 /*MALFORMED OVERVIEW DATA FIX*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main.st-emotion-cache-uf99v8.ea3mdgi5 > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div{
     background-color: none;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) > div > div > div > div > div > div > p{
+    max-width: 1100%;
+    width: 1000%;
+}
+
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div{
+    padding-left:33% ;
 }
 
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.glideDataEditor.wzg2m5k{
@@ -206,6 +213,12 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(9) > div > div > div > div.glideDataEditor.wzg2m5k{
     box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
 }
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.st-emotion-cache-ocqkz7.e1f1d6gn3 > div:nth-child(2) > div:nth-child(1) > div > div > div > div > div > div.glideDataEditor.wzg2m5k{
+    box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div.st-emotion-cache-ocqkz7.e1f1d6gn3 > div:nth-child(1) > div:nth-child(1) > div > div > div > div > div > div.glideDataEditor.wzg2m5k{
+    box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.259);
+}
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(11) > div:nth-child(1) > div:nth-child(1) > div > div > div,#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(11) > div:nth-child(2) > div:nth-child(1) > div > div > div,#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(11) > div:nth-child(3) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div:nth-child(1) > div:nth-child(1) > div > div > div,#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div:nth-child(2) > div:nth-child(1) > div > div > div, #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(14) > div:nth-child(3) > div:nth-child(1) > div > div > div{
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.259);
     border-radius: 14px;
@@ -255,7 +268,6 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
     color: #0003a9;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div{
-    width: 11em;
     color: #0003a9;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(17) > div:nth-child(3) > div:nth-child(1) > div > div:nth-child(2) > div > div > div > img{
@@ -269,6 +281,9 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(17) > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(2) > div > div > div > img{
     margin-block-start: 2em;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) > div > div{
+    max-width: 37%;
 }
 #feature-importance > div > span{
     margin-left: 5em;
