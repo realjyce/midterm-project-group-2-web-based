@@ -27,7 +27,6 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 #Heatmap
 import leafmap.foliumap as leafmap
-
 # Ignore SSL certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -40,66 +39,72 @@ def convert_df(df):
 def load_data(url):
     df = pd.read_csv(url)
     return df
-
-df = load_data('./Project/Data.csv')
-df_new = load_data('./Project/NewData.csv')
-
-df_1 = df.iloc[:, :-1]
-X = df_1
-y = df.iloc[:, -1]  # Assuming last col is dependent var
-#Download Display For Download: SUCCESS!
-display_success = False
-
-# Initialize variables outside (GLOBAL)
-X_train, X_test, y_train, y_test = None, None, None, None
-model = None
-train_ratio = 0.8  # DEFAULT VALUE
-
+X = None
+y = None
+train_ratio = 0.8 
 # MENU-ING AND TITLE
+st.markdown(
+    """
+    <style>
+        .streamlit-option-menu .stSelectbox .stText {
+            font-size: 30px;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 menu = option_menu(
-    menu_title=None,
+    menu_title="Web-Based Machine Learning Application",
     options=["Home", "Raw Data", "Model", "Predictions"],
     icons=["house", "database", "file-earmark-bar-graph","play"],
-    menu_icon="cast",
+    menu_icon="robot",
     orientation="horizontal",
     )
 
+# HOME
+uploaded_file = None
 if menu == "Home":
-    st.title("Web-Based Machine Learning Application")
+    def show_data(uploaded_file):
+        st.title("")
+        st.markdown('<h1 style="color: #170e45; width: 2000px; font-size: 205%; margin-bottom:20px; margin-top: -40px; "><span style="font-size:1.5em; display:inline-block; line-height:5px;margin-top:6px;"></span><span style="color:#006fff;">👾</span>  Hello User, upload Data in the <span style="color:#006fff">Raw Data</span> section to begin</h1>', unsafe_allow_html=True)
+        if "data" not in st.session_state:
+            st.warning("⚠️ Please upload a CSV file before proceeding. ⚠️")
+        if uploaded_file is not None:
+            df = load_data(uploaded_file)
+            st.success("Data loaded successfully!")
+            st.session_state.data = df
 
-    # Data Input Section
-    st.header("Data Input")
-
-    uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
-
-    if uploaded_file is not None:
-        df = load_data(uploaded_file)
-
-        # Display Data Overview
+    def landing():
+        st.title("🕮 Data Overview")
+        df = st.session_state.data
         st.header("Head Overview Data")
         st.write(df.head())
-        st.header("Data Summary")
-        st.write(df.describe())
-        st.header("Data Values")
-        st.write(df.value_counts(subset=None, normalize=False, sort=True, ascending=False, dropna=True))
-        st.header("Data Keys")
-        st.write(df.keys())
 
-# RAW DATA
+    def datareq():
+        if "data" not in st.session_state:
+            show_data(uploaded_file)
+        else:
+            landing()
+
+    if __name__ == "__main__":
+        datareq()
+
 if menu == "Raw Data":
     title = st.title('Input Data')
-    
-    # Data Input Section
     uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
     if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file)
+        # Load the uploaded file into a DataFrame
+        df_upload = pd.read_csv(uploaded_file)
 
+        # Use the uploaded file directly for subsequent operations
+        st.session_state.data = df_upload
+        st.session_state.uploaded_file = uploaded_file
         # User: selectbox the training and testing data ratio
         st.subheader('Select Training and Testing Data Ratio')
         ratio_option = st.selectbox("Data Ratio:", ["90:10", "80:20", "70:30", "60:40"])
 
-        # Map the according ratio to a train-test split ratio
+        # Train-test split ratio
         if ratio_option == "90:10":
             train_ratio = 0.9
             st.toast('Running...')
@@ -114,21 +119,21 @@ if menu == "Raw Data":
             st.toast('Running...')
 
         # Split the data into training and testing sets based on the selected ratio
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(df_upload.iloc[:, :-1], df_upload.iloc[:, -1], test_size=1 - train_ratio, random_state=42)
         st.subheader("Data Shape:")
-        col1, col2, col3 = st.columns((1,1,3))
+        col1, col2, col3 = st.columns((1, 1, 3))
 
         # Training data shape + Display
         with col1:
             st.write("Training Data Shape:", X_train.shape)
 
-         # Testing data shape + Display
+        # Testing data shape + Display
         with col2:
             st.write("Testing Data Shape:", X_test.shape)
 
         # Display the training and testing data separately
         st.subheader("Training Data")
-        tab1a, tab1b, tab1c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
+        tab1a, tab1b, tab1c = st.tabs(['Chart📈', 'DataFrame📄', 'Export📁'])
         with tab1a:
             st.bar_chart(X_train)
         with tab1b:
@@ -145,7 +150,7 @@ if menu == "Raw Data":
                 st.success("Download Successful!")
 
         st.subheader("Testing Data")
-        tab2a, tab2b, tab2c = st.tabs(['Chart📈','DataFrame📄','Export📁'])
+        tab2a, tab2b, tab2c = st.tabs(['Chart📈', 'DataFrame📄', 'Export📁'])
         with tab2a:
             st.bar_chart(X_test)
         with tab2b:
@@ -160,6 +165,7 @@ if menu == "Raw Data":
             )
             if download2:
                 st.success("Download Successful!")
+        # Rest of your code...
 
         if st.button('Rerun'):
             st.experimental_rerun()
@@ -169,116 +175,119 @@ if menu == "Raw Data":
 
 # MODEL
 if menu == "Model":
+    uploaded_file = st.session_state.get('uploaded_file', None)
     st.header("Choose Machine Learning Model")
     model_option = st.selectbox("Select Model", ["Random Forest", "XGBoost"])
-
     if model_option == "Random Forest":
         model = RandomForestRegressor()
-    if model_option == "XGBoost":
+    elif model_option == "XGBoost":
         model = XGBRegressor(  
-        learning_rate=0.1,      
-        n_estimators=100,       
-        max_depth=3,            
-        min_child_weight=1,     
-        subsample=0.8,          
-        colsample_bytree=0.8,   
-        objective='reg:squarederror',
-        random_state=42)
+            learning_rate=0.1,      
+            n_estimators=100,       
+            max_depth=3,            
+            min_child_weight=1,     
+            subsample=0.8,          
+            colsample_bytree=0.8,   
+            objective='reg:squarederror',
+            random_state=42
+    )
 
-    st.header("Run Model and Evaluate Results")
     if st.button("Run Model"):
-        # Split the data into training and testing sets based on the selected ratio, again.(for LOCAL scope)
-        st.toast('Running Code...')
-        with st.spinner(text='Loading...'):
-            time.sleep(1)
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+        if uploaded_file is not None:
+            st.header("Run Model and Evaluate Results")
+            df_upload = st.session_state.data
+            st.toast('Running Code...')
+            with st.spinner(text='Loading...'):
+                time.sleep(1)
+            X_train, X_test, y_train, y_test = train_test_split(df_upload.iloc[:, :-1], df_upload.iloc[:, -1], test_size=1 - train_ratio, random_state=42)
 
-        model.fit(X_train, y_train)
-        y_train_pred = model.predict(X_train)
-        y_test_pred = model.predict(X_test)
+            model.fit(X_train, y_train)
+            y_train_pred = model.predict(X_train)
+            y_test_pred = model.predict(X_test)
 
-        from sklearn.metrics import mean_squared_error
-        from sklearn.metrics import mean_absolute_error
-        from sklearn.metrics import r2_score
+            from sklearn.metrics import mean_squared_error
+            from sklearn.metrics import mean_absolute_error
+            from sklearn.metrics import r2_score
 
-        # Metrics for training data
-        rmse_train = mean_squared_error(y_train, y_train_pred)
-        mae_train = mean_absolute_error(y_train, y_train_pred)
-        r2_train = r2_score(y_train, y_train_pred)
+            # Metrics for training data
+            rmse_train = mean_squared_error(y_train, y_train_pred)
+            mae_train = mean_absolute_error(y_train, y_train_pred)
+            r2_train = r2_score(y_train, y_train_pred)
 
-        # Metrics for testing data
-        rmse_test = mean_squared_error(y_test, y_test_pred)
-        mae_test = mean_absolute_error(y_test, y_test_pred)
-        r2_test = r2_score(y_test, y_test_pred)
+            # Metrics for testing data
+            rmse_test = mean_squared_error(y_test, y_test_pred)
+            mae_test = mean_absolute_error(y_test, y_test_pred)
+            r2_test = r2_score(y_test, y_test_pred)
 
-        st.divider()
-        
-        st.header("Evaluate Training Data")
-        col1, col2, col3 = st.columns(3)
-        col1.metric("RMSE", f'{rmse_train:.5f}')
-        col2.metric("MAE", f'{mae_train:.5f}')
-        col3.metric("R2 Score", f'{r2_train:.5f}')
-        
-        st.divider()
-        
-        st.header("Evaluate Testing Data")
-        col1, col2, col3 = st.columns(3)
-        col1.metric("RMSE", f'{rmse_test:.5f}')
-        col2.metric("MAE", f'{mae_test:.5f}')
-        col3.metric("R2 Score", f'{r2_test:.5f}')
-     
-        st.divider()
+            st.divider()
 
-        col1, col2, col3 = st.columns((1, 1, 1))
+            st.header("Evaluate Training Data")
+            col1, col2, col3 = st.columns(3)
+            col1.metric("RMSE", f'{rmse_train:.5f}')
+            col2.metric("MAE", f'{mae_train:.5f}')
+            col3.metric("R2 Score", f'{r2_train:.5f}')
 
-        # Histogram of errors for training data
-    
-        with col1:
-            st.subheader("Histogram of Errors (Training)")
-            error_hist_train = sns.histplot(y_train - y_train_pred, kde=True, figure=plt.figure(figsize=(7, 7)))
-            st.pyplot(error_hist_train.figure)
+            st.divider()
 
-        # Histogram of errors for testing data
-        with col2:
-            st.subheader("Histogram of Errors (Testing)")
-            error_hist_test = sns.histplot(y_test - y_test_pred, kde=True)
-            st.pyplot(error_hist_test.figure)
+            st.header("Evaluate Testing Data")
+            col1, col2, col3 = st.columns(3)
+            col1.metric("RMSE", f'{rmse_test:.5f}')
+            col2.metric("MAE", f'{mae_test:.5f}')
+            col3.metric("R2 Score", f'{r2_test:.5f}')
 
-        # Feature Importance
-        with col3:
-            st.subheader("Feature Importance")
+            st.divider()
 
-            # Update to use column names from the loaded CSV file
-            feature_names = df_1.columns
-            feature_importance = model.feature_importances_
-            importance_df = pd.DataFrame({"Feature": feature_names, "Importance": feature_importance})
+            col1, col2, col3 = st.columns((1, 1, 1))
 
-            # Bar chart
-            importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
-            st.pyplot(importance_chart.figure)
-            
-        st.toast('Done!')
+            # Histogram of errors for training data
 
-        # Export predicted val in CSV format
-        csv_data = convert_df(pd.DataFrame({"Actual (Test)": y_test, "Predicted (Test)": y_test_pred}))
-        download3 = st.download_button(
-            label="Download Predictions as CSV",
-            data=csv_data,
-            file_name='predictions.csv',
-            mime='text/csv',
-        ) 
-        if download3: st.success("Download Successful!")
+            with col1:
+                st.subheader("Histogram of Errors (Training)")
+                error_hist_train = sns.histplot(y_train - y_train_pred, kde=True, figure=plt.figure(figsize=(7, 7)))
+                st.pyplot(error_hist_train.figure)
+
+            # Histogram of errors for testing data
+            with col2:
+                st.subheader("Histogram of Errors (Testing)")
+                error_hist_test = sns.histplot(y_test - y_test_pred, kde=True)
+                st.pyplot(error_hist_test.figure)
+
+            # Feature Importance
+            with col3:
+                st.subheader("Feature Importance")
+                print("Length of feature_names:", len(feature_names))
+                print("Length of feature_importance:", len(feature_importance))
+                # Update to use column names from the loaded CSV file
+                feature_names = df_upload.columns
+                feature_importance = model.feature_importances_
+                importance_df = pd.DataFrame({"Feature": feature_names, "Importance": feature_importance})
+
+                # Bar chart
+                importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
+                st.pyplot(importance_chart.figure)
+
+            st.toast('Done!')
+
+            # Export predicted values in CSV format
+            csv_data = convert_df(pd.DataFrame({"Actual (Test)": y_test, "Predicted (Test)": y_test_pred}))
+            download3 = st.download_button(
+                label="Download Predictions as CSV",
+                data=csv_data,
+                file_name='predictions.csv',
+                mime='text/csv',
+            ) 
+            if download3: st.success("Download Successful!")
         
         
         
 if menu == "Predictions":
    # Upload Section | NEWDATA
     st.header("Predict on Study Area")
-    st.subheader("Upload New Data!")
+    st.subheader("Call New Data")
     uploaded_file = st.file_uploader("Upload CSV file for prediction", type=["csv"])
     if uploaded_file is not None:
         new_data = pd.read_csv(uploaded_file)
-        st.write("Head of the DataFrame:")
+        st.write("Head DataFrame:")
         st.write(new_data.head())    
     
         # Model Selct
@@ -332,6 +341,8 @@ if menu == "Predictions":
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+        else:
+            st.warning("Please train the model before making predictions.")
     
 
     if prediction_model is not None:
@@ -348,7 +359,7 @@ if menu == "Predictions":
         # Check model fitting before predictions
         if hasattr(prediction_model, 'predict'): #has attribute of 'predict'
             try:
-                new_data_predictions = prediction_model.predict(df_new)# If not, preprocess
+                new_data_predictions = prediction_model.predict(new_data)# If not, preprocess
 
                 # Display predictions
                 st.subheader("Predictions on Existing Data")
@@ -358,7 +369,7 @@ if menu == "Predictions":
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
                 
                 st.download_button(
-                    label="Download Predictions on NewData as CSV",
+                    label="💾 Download Predictions as CSV",
                     data=predictions_csv_data,
                     file_name='new_data_predictions.csv',
                     mime='text/csv',
@@ -370,9 +381,10 @@ if menu == "Predictions":
                     
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+            except Exception as e:
+                st.stop()
 
-        else:
-            st.warning("Please train the model before making predictions.")
+
             
 
     def load_model():
@@ -403,8 +415,20 @@ if menu == "Predictions":
                 st.write(df_results)
                 fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
                 st.plotly_chart(fig)
+                st.download_button(
+                    label="💾 Download Density Map as ",
+                    data=predictions_csv_data,
+                    file_name='new_data_predictions.csv',
+                    mime='text/csv',
+                )
                 fig = px.imshow([new_data_predictions], title='Heatmap of Predicted Flood')
                 st.plotly_chart(fig)
+                st.download_button(
+                    label="💾 Download Predictions as CSV",
+                    data=predictions_csv_data,
+                    file_name='new_data_predictions.csv',
+                    mime='text/csv',
+                )
                 # Download button for predictions (.csv)
                 predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": uploaded_data_predictions}))
             except NotFittedError:

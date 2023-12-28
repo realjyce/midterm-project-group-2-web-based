@@ -10,7 +10,7 @@ secondaryBackgroundColor = "#FFFFFF"
 textColor = "#0a0a36"
 
 [client]
-showErrorDetails = true
+showErrorDetails = false
 toolbarMode = "auto"
 
 [browser]
