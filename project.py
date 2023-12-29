@@ -106,8 +106,10 @@ if menu == "Raw Data":
 
     if uploaded_file is not None:
         df_upload = pd.read_csv(uploaded_file)
+        
         st.session_state.data = df_upload
         st.session_state.uploaded_file = uploaded_file
+
         st.subheader('Select Training and Testing Data Ratio')
         ratio_option = st.selectbox("Data Ratio:", ["90:10", "80:20", "70:30", "60:40"])
 
@@ -124,9 +126,19 @@ if menu == "Raw Data":
             train_ratio = 0.6
             st.toast('Running...')
 
-        #independent variables = X & dependent variable of y
-        X = df_upload.iloc[:, :-1]
-        y = df_upload.iloc[:, -1]
+        st.subheader('Select Independent and Dependent Columns')
+        independent_col = st.multiselect("Independent Columns:", df_upload.columns[:-1])
+        st.write("Selected Independent Columns:", independent_col)
+        if len(df_upload.columns) > 1:
+            dependent_col_options = df_upload.columns.tolist()
+            dependent_col = st.selectbox("Dependent Column:", dependent_col_options)
+            st.write("Selected Dependent Column:", dependent_col)
+        else:
+            st.warning("Not enough columns to select a dependent variable.")
+            st.stop()
+
+        X = df_upload[independent_col]
+        y = df_upload[dependent_col]
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
 
@@ -178,6 +190,7 @@ if menu == "Raw Data":
             st.toast('Done!')
 
         st.toast('Done!')
+
 
 
 if menu == "Model":
