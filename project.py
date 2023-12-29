@@ -124,7 +124,12 @@ if menu == "Raw Data":
             train_ratio = 0.6
             st.toast('Running...')
 
-        X_train, X_test, y_train, y_test = train_test_split(df_upload.iloc[:, :-1], df_upload.iloc[:, -1], test_size=1 - train_ratio, random_state=42)
+        #independent variables = X & dependent variable of y
+        X = df_upload.iloc[:, :-1]
+        y = df_upload.iloc[:, -1]
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1 - train_ratio, random_state=42)
+
         st.subheader("Data Shape:")
         col1, col2, col3 = st.columns((1, 1, 3))
 
@@ -173,6 +178,7 @@ if menu == "Raw Data":
             st.toast('Done!')
 
         st.toast('Done!')
+
 
 if menu == "Model":
     uploaded_file = st.session_state.get('uploaded_file', None)
