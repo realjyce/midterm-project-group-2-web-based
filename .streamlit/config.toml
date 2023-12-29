@@ -21,7 +21,8 @@ serverPort = 8501
 [global]
 disableWidgetStateDuplicationWarning = false
 showWarningOnDirectExecution = true
-dataFrameSerialization = "arrow"
+arrowSerialization = true
+
 
 [logger]
 level = "info"
