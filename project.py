@@ -327,6 +327,7 @@ if menu == "Predictions":
                     st.subheader("Predictions on New Data")
                     df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
                     st.write(df_results)
+                    predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
                     st.download_button(
                         label="Download Predictions on NewData as CSV",
                         data=predictions_csv_data,
@@ -335,7 +336,7 @@ if menu == "Predictions":
                     )
                     fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
                     st.plotly_chart(fig)
-                    predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
+                    
 
                     st.subheader("Heatmap of Predictions on New Data")
         
