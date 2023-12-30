@@ -387,8 +387,7 @@ if menu == "Predictions":
         co1, co2, co3 = st.columns((1, 1, 2))
 
         # Show the folium map using the st.folium_static method
-        with co2:
-            folium_static(prediction_map)
+        folium_static(prediction_map)
         
 hide_made_with_streamlit = """
     <style>
