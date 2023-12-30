@@ -277,9 +277,7 @@ if menu == "Model":
                 print("Length of feature_names:", len(feature_names))
                 print("Length of feature_importance:", len(feature_importance))
 
-                # Ensure that feature_importance has the same length as feature_names
                 if len(feature_importance) < len(feature_names):
-                    # Pad with zeros for the missing features
                     feature_importance = np.concatenate([feature_importance, np.zeros(len(feature_names) - len(feature_importance))])
 
                 importance_df = pd.DataFrame({"Feature": feature_names, "Importance": feature_importance})
