@@ -26,8 +26,16 @@ footer {visibility:hidden;}
     width: 1000%;
 }
 
-#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div{
-    padding-left:33% ;
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div{
+    color:#006fff;
+    width: 10.5%;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.st-bo.st-bp.st-b3.st-da.st-cb.st-db.st-cg{
+    padding: 0;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(8) > div > div > div{
+    min-width: 40%;
+    color: #006fff;
 }
 
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div.glideDataEditor.wzg2m5k{
@@ -232,7 +240,10 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 /*SelectBoxes*/
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div > div{
     width: 11%;
-    
+    color: #0003a9;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5) > div > div > div{
+    color: #0003a9;
 }
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(5) > div > div > div{
     width: 17%;
