@@ -339,7 +339,7 @@ if menu == "Predictions":
             X_train_new, _, y_train_new, _ = train_test_split(df_new.iloc[:, :-1], df_new.iloc[:, -1], test_size=1 - train_ratio, random_state=42)
             
             prediction_model_new.fit(X_train_new, y_train_new)
-            st.session_state.new_data_predictions = pd.DataFrame({"Predicted Flood": prediction_model_new.predict(X_train_new)})
+            st.session_state.new_data_predictions = pd.DataFrame({"Prediction": prediction_model_new.predict(X_train_new)})
             
             st.toast("Done!")
 
@@ -350,7 +350,7 @@ if menu == "Predictions":
                     col1, col2 = st.columns((1, 2))
                     with col1:
                         st.subheader("Predictions on New Data")
-                        df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
+                        df_results = pd.DataFrame({"Prediction": new_data_predictions})
                         st.write(df_results)
                         predictions_csv_data = convert_df(pd.DataFrame({"Prediction": new_data_predictions}))
                     st.download_button(
