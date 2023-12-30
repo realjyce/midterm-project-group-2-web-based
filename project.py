@@ -340,38 +340,56 @@ if menu == "Predictions":
             try:
                 if df_new is not None and X_train_new is not None:
                     new_data_predictions = prediction_model_new.predict(X_train_new)
-                    st.subheader("Predictions on New Data")
-                    df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
-                    st.write(df_results)
-                    predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
+                    col1, col2 = st.columns((1, 2))
+                    with col1:
+                        st.subheader("Predictions on New Data")
+                        df_results = pd.DataFrame({"Predicted Flood": new_data_predictions})
+                        st.write(df_results)
+                        predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
                     st.download_button(
                         label="Download Predictions on NewData as CSV",
                         data=predictions_csv_data,
                         file_name='new_data_predictions.csv',
                         mime='text/csv',
                     )
-                    fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
-                    st.plotly_chart(fig)
+                    with col2:
+                        fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
+                        st.plotly_chart(fig)
 
-                    st.subheader("Heatmap of Predictions on New Data")
-                    # Create a folium map centered around the mean coordinates of your new data
-                    map_center = [df_new['Latitude'].mean(), df_new['Longitude'].mean()]
-                    prediction_map = folium.Map(location=map_center, zoom_start=10)
-
-                    # Create a HeatMap layer from the prediction coordinates
-                    heat_data = [[row['Latitude'], row['Longitude']] for _, row in df_new.iterrows()]
-                    HeatMap(heat_data).add_to(prediction_map)
-
-                    # Show the folium map using the st.folium_static method
-                    folium_static(prediction_map)
-                    
                 else:
                     st.warning("Please upload a CSV file and train the model before making predictions.")
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
         else:
             st.warning("Please train the model before making predictions.")
+    
+        st.subheader("Heatmap of Predictions on New Data")
 
+        col1, col2, col3 = st.columns((1, 1, 2))
+        
+        # Create a dropdown box for latitude and longitude selection
+        with col1:
+            lat_col = st.selectbox("Select Latitude Column:", df_new.columns)
+        with col2:
+            lon_col = st.selectbox("Select Longitude Column:", df_new.columns)
+        with col3:
+        # Create multiple sections to select column data
+            selected_cols = st.multiselect("Select Columns:", df_new.columns)
+
+        # Create a folium map centered around the mean coordinates of your new data
+        map_center = [df_new[lat_col].mean(), df_new[lon_col].mean()]
+        prediction_map = folium.Map(location=map_center, zoom_start=10)
+
+        # Create a HeatMap layer from the selected coordinates and columns
+        heat_data = [[row[lat_col], row[lon_col]] + [row[col] for col in selected_cols] for _, row in df_new.iterrows()]
+        HeatMap(heat_data).add_to(prediction_map)
+
+        co1, co2, co3 = st.columns((1, 1, 2))
+
+        # Show the folium map using the st.folium_static method
+        with co2:
+            folium_static(prediction_map)
+        
 hide_made_with_streamlit = """
     <style>
         #MainMenu{visibility: hidden;}
