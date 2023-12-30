@@ -139,6 +139,15 @@ div.st-emotion-cache-nuq5nq.eczjsme11{
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(18) > div > button{
     transition: scale 350ms ease-in, opacity 350ms linear, color 350ms ease-in-out;
 }
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(6) > div > div > div > div > div > div > p{
+    width: 1000%;
+    padding-left: 320%;
+}
+#root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(7) > div > div > div > div > div > div > p{
+    width: 1000%;
+    padding-left: 320%;
+    color: grey;
+}
 #root > div:nth-child(1) > div.withScreencast > div > div > div > section > div.block-container.st-emotion-cache-z5fcl4.ea3mdgi4 > div:nth-child(1) > div > div:nth-child(18) > div > button:hover{
     scale: 1.01;
     color:#ffffff;

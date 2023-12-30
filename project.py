@@ -303,7 +303,7 @@ if menu == "Predictions":
 
     if uploaded_file_new is not None:
         df_new = pd.read_csv(uploaded_file_new)
-        st.success("Uploaded new data successfully!")
+        st.success("Successfully uploaded new data!")
         st.session_state.df_new = df_new
 
     st.subheader("Select Model for Predictions on New Data")
@@ -328,7 +328,7 @@ if menu == "Predictions":
         if st.button("Train Model for Predictions"):
             with st.spinner(text='Loading...'):
                 time.sleep(1)
-            st.toast("Running...")
+            st.toast("Predicting...")
 
             X_train_new, _, y_train_new, _ = train_test_split(df_new.iloc[:, :-1], df_new.iloc[:, -1], test_size=1 - train_ratio, random_state=42)
 
