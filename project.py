@@ -31,6 +31,9 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import leafmap.foliumap as leafmap
 import seaborn as sns
+import folium
+from streamlit_folium import folium_static
+from folium.plugins import HeatMap
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -349,13 +352,19 @@ if menu == "Predictions":
                     )
                     fig = px.histogram(df_results, x='Predicted Flood', title='Density Map of Predicted Flood')
                     st.plotly_chart(fig)
-                    
 
                     st.subheader("Heatmap of Predictions on New Data")
-        
-                    heatmap_data = pd.DataFrame({"Predicted Flood": new_data_predictions})
-                    heatmap = sns.heatmap(heatmap_data, annot=True, cmap="YlGnBu", cbar_kws={'label': 'Predicted Flood'})
-                    st.pyplot(heatmap.figure)
+                    # Create a folium map centered around the mean coordinates of your new data
+                    map_center = [df_new['Latitude'].mean(), df_new['Longitude'].mean()]
+                    prediction_map = folium.Map(location=map_center, zoom_start=10)
+
+                    # Create a HeatMap layer from the prediction coordinates
+                    heat_data = [[row['Latitude'], row['Longitude']] for _, row in df_new.iterrows()]
+                    HeatMap(heat_data).add_to(prediction_map)
+
+                    # Show the folium map using the st.folium_static method
+                    folium_static(prediction_map)
+                    
                 else:
                     st.warning("Please upload a CSV file and train the model before making predictions.")
             except NotFittedError:
