@@ -367,27 +367,21 @@ if menu == "Predictions":
 
         col1, col2, col3 = st.columns((1, 1, 2))
         
-        # Create a dropdown box for latitude and longitude selection
         with col1:
             lat_col = st.selectbox("Select Latitude Column:", df_new.columns)
         with col2:
             lon_col = st.selectbox("Select Longitude Column:", df_new.columns)
         with col3:
-        # Create multiple sections to select column data
             selected_cols = st.multiselect("Select Columns:", df_new.columns)
 
-        # Create a folium map centered around the mean coordinates of your new data
-        map_center = [df_new[lat_col].mean(), df_new[lon_col].mean()]
-        prediction_map = folium.Map(location=map_center, zoom_start=10)
-
-        # Create a HeatMap layer from the selected coordinates and columns
-        heat_data = [[row[lat_col], row[lon_col]] + [row[col] for col in selected_cols] for _, row in df_new.iterrows()]
-        HeatMap(heat_data).add_to(prediction_map)
+        map = [df_new[lat_col].mean(), df_new[lon_col].mean()]
+        heat_map = folium.Map(location=map, zoom_start=10)
+        heat_ = [[row[lat_col], row[lon_col]] + [row[col] for col in selected_cols] for _, row in df_new.iterrows()]
+        HeatMap(heat_).add_to(heat_map)
 
         co1, co2, co3 = st.columns((1, 1, 2))
 
-        # Show the folium map using the st.folium_static method
-        folium_static(prediction_map)
+        folium_static(heat_map)
         
 hide_made_with_streamlit = """
     <style>
