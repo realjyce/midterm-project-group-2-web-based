@@ -337,9 +337,10 @@ if menu == "Predictions":
             st.toast("Predicting...")
 
             X_train_new, _, y_train_new, _ = train_test_split(df_new.iloc[:, :-1], df_new.iloc[:, -1], test_size=1 - train_ratio, random_state=42)
-
+            
             prediction_model_new.fit(X_train_new, y_train_new)
-
+            st.session_state.new_data_predictions = pd.DataFrame({"Predicted Flood": prediction_model_new.predict(X_train_new)})
+            
             st.toast("Done!")
 
         if hasattr(prediction_model_new, 'predict'):
@@ -353,7 +354,7 @@ if menu == "Predictions":
                         st.write(df_results)
                         predictions_csv_data = convert_df(pd.DataFrame({"Predicted Flood": new_data_predictions}))
                     st.download_button(
-                        label="Download Predictions on NewData as CSV",
+                        label="Download Predictions on NewData as .csv file",
                         data=predictions_csv_data,
                         file_name='new_data_predictions.csv',
                         mime='text/csv',
@@ -363,32 +364,56 @@ if menu == "Predictions":
                         st.plotly_chart(fig)
 
                 else:
-                    st.warning("Please upload a CSV file and train the model before making predictions.")
+                    st.warning("Train the model before begin predicting 🤚.")
             except NotFittedError:
                 st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
         else:
-            st.warning("Please train the model before making predictions.")
-    
-        st.subheader("Heatmap of Predictions on New Data")
+            st.warning("Train the model predicting \(￣︶￣*\).")
+
+        st.subheader("Heatmap of Prediction")
 
         col1, col2, col3 = st.columns((1, 1, 2))
-        
+
         with col1:
-            lat_col = st.selectbox("Select Latitude Column:", df_new.columns)
+            lat = st.selectbox("Select LAT:", df_new.columns)
+
         with col2:
-            lon_col = st.selectbox("Select Longitude Column:", df_new.columns)
+            lon = st.selectbox("Select LON:", df_new.columns)
+
         with col3:
-            selected_cols = st.multiselect("Select Columns:", df_new.columns)
+            if 'new_data_predictions' in st.session_state and isinstance(st.session_state.new_data_predictions, pd.DataFrame):
+                pred_col = st.selectbox("Select Column:", st.session_state.new_data_predictions.columns, key="heatmap_column")
+            else:
+                st.warning("Prediction Required!")
 
-        map = [df_new[lat_col].mean(), df_new[lon_col].mean()]
-        heat_map = folium.Map(location=map, zoom_start=10)
-        heat_ = [[row[lat_col], row[lon_col]] + [row[col] for col in selected_cols] for _, row in df_new.iterrows()]
-        HeatMap(heat_).add_to(heat_map)
+        map = [df_new[lat].mean(), df_new[lon].mean()]
+        heatmap = folium.Map(location=map, zoom_start=10)
 
-        co1, co2, co3 = st.columns((1, 1, 2))
+        if 'new_data_predictions' in st.session_state and isinstance(st.session_state.new_data_predictions, pd.DataFrame):
+            if lat in df_new.columns and lon in df_new.columns and pred_col in st.session_state.new_data_predictions.columns:
+                data_heat = []
+                norm = (st.session_state.new_data_predictions[pred_col] - st.session_state.new_data_predictions[pred_col].min()) / (st.session_state.new_data_predictions[pred_col].max() - st.session_state.new_data_predictions[pred_col].min())
 
-        folium_static(heat_map)
-        
+                for i in df_new.index:
+                    if lat in df_new.columns and lon in df_new.columns:
+                        intensity = norm.get(i, None)
+                        if intensity is not None:
+                            data_heat.append([df_new.at[i, lat], df_new.at[i, lon], intensity])
+                    else:
+                        print(f"Missing columns in DataFrame: {df_new.columns}")
+
+                if data_heat:
+                    HeatMap(data_heat).add_to(heatmap)
+                    folium_static(heatmap)
+                else:
+                    st.warning("No data available for creating the heatmap.")
+            else:
+                st.warning("Latitude, Longitude, or Selected Prediction columns not found in the DataFrames.")
+        else:
+            st.warning("Complete Prediction To Unlock The Heatmap 🗺️")
+
+
+
 hide_made_with_streamlit = """
     <style>
         #MainMenu{visibility: hidden;}
