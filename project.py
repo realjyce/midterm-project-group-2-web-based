@@ -15,6 +15,7 @@ class _SessionState:
 session_state = _SessionState()
 
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 import ssl
 from sklearn.impute import SimpleImputer
@@ -269,16 +270,23 @@ if menu == "Model":
 
             with col3:
                 st.subheader("Feature Importance")
-                
+
                 feature_names = df_upload.columns
                 feature_importance = model.feature_importances_
-                
-                if len(feature_names) != len(feature_importance):
-                    st.warning("Mismatch in the number of feature names and feature importance values.")
-                else:
-                    importance_df = pd.DataFrame({"Feature": feature_names, "Importance": feature_importance})
-                    importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
-                    st.pyplot(importance_chart.figure)
+
+                print("Length of feature_names:", len(feature_names))
+                print("Length of feature_importance:", len(feature_importance))
+
+                # Ensure that feature_importance has the same length as feature_names
+                if len(feature_importance) < len(feature_names):
+                    # Pad with zeros for the missing features
+                    feature_importance = np.concatenate([feature_importance, np.zeros(len(feature_names) - len(feature_importance))])
+
+                importance_df = pd.DataFrame({"Feature": feature_names, "Importance": feature_importance})
+                print("Length of importance_df:", len(importance_df))
+
+                importance_chart = sns.barplot(x="Importance", y="Feature", data=importance_df)
+                st.pyplot(importance_chart.figure)
 
             st.toast('Done!')
 
