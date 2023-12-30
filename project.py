@@ -366,7 +366,7 @@ if menu == "Predictions":
                 else:
                     st.warning("Train the model before begin predicting 🤚.")
             except NotFittedError:
-                st.warning("The model has not been trained. Please click 'Train Model for Predictions'.")
+                st.warning("The model has not been trained yet. Press Train!")
         else:
             st.warning("Train the model predicting \(￣︶￣*\).")
 
@@ -406,9 +406,9 @@ if menu == "Predictions":
                     HeatMap(data_heat).add_to(heatmap)
                     folium_static(heatmap)
                 else:
-                    st.warning("No data available for creating the heatmap.")
+                    st.warning("Insufficient Data.")
             else:
-                st.warning("Latitude, Longitude, or Selected Prediction columns not found in the DataFrames.")
+                st.warning("Columns not found!")
         else:
             st.warning("Complete Prediction To Unlock The Heatmap 🗺️")
 
